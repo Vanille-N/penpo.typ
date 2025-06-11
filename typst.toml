@@ -1,0 +1,8 @@
+[package]
+name = "pona"
+version = "0.1.0"
+entrypoint = "src/lib.typ"
+authors = ["jan Newen (jan-newen@crans.org)"]
+license = "MIT"
+description = "ni li ken alasa e pakala lili, li ken sitelen e lipu sina / toki pona spellchecker and typesetter"
+
