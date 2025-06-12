@@ -1,5 +1,5 @@
 [package]
-name = "pona"
+name = "penpo"
 version = "0.1.0"
 entrypoint = "src/lib.typ"
 authors = ["jan Newen (jan-newen@crans.org)"]
