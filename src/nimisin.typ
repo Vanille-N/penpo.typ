@@ -4,35 +4,37 @@
 #import "pakala.typ"
 #import "kipisi.typ"
 
-#let nimisin-spellings = state("nimisin-spellings", (:))
-#let nimisin-shortenable = state("nimisin-shortenable", (:))
-#let nimisin-initials = state("nimisin-initials", (:))
+#let localize-label(lab) = aux.localize-label("nimisin", lab)
+
+#let spellings = state(localize-label("spellings"), (:))
+#let shortenable = state(localize-label("shortenable"), (:))
+#let initials = state(localize-label("initials"), (:))
 
 #let nimisin-lili-forget() = {
-  nimisin-shortenable.update(_ => (:))
-  nimisin-initials.update(_ => (:))
+  shortenable.update(_ => (:))
+  initials.update(_ => (:))
 }
 
 #let nimisin-kama-lili(nimi, lili, spelling) = context {
-  nimisin-shortenable.update(seen => {
+  shortenable.update(seen => {
     seen.insert(nimi, ())
     seen
   })
-  let seen = nimisin-initials.get()
+  let seen = initials.get()
   let key = lili.join(" ")
   if key in seen {
     if nimi != seen.at(key) {
-      pakala.sama-sitelen-wan(key, (nimi, spelling), nimisin-initials.get().at(key))
+      pakala.sama-sitelen-wan(key, (nimi, spelling), initials.get().at(key))
     }
   } else {
-    nimisin-initials.update(seen => {
+    initials.update(seen => {
       seen.insert(key, (nimi, spelling))
       seen
     })
   }
 }
 
-#let nimisin(word) = (letters) => {
+#let nimisin-wan(word) = (letters) => {
   let errors = ()
   let letters = letters.split(" ").filter(w => w != "")
   if word.len() != letters.len() {
@@ -68,9 +70,14 @@
   for error in errors {
     error
   }
-  nimisin-spellings.update(nimi => {
+  spellings.update(nimi => {
     nimi.insert(word, (full: chars, short: chars.slice(0, 1)))
     nimi
   })
 }
 
+#let nimisin(..args) = {
+  for (key, val) in args.named() {
+    nimisin-wan(key)(val)
+  }
+}

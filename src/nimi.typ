@@ -65,6 +65,8 @@
   "!": punct("!", ""),
   ",": punct(",", ""),
   "?": punct("?", ""),
+  "(": punct("(", [#h(2mm)---], spacing: "open"),
+  ")": punct("(", [---#h(2mm)]),
   "~": punct("", h(2.5mm)),
   "~~": punct("", h(5mm)),
   "\\": punct(linebreak(), ""),

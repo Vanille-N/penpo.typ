@@ -78,9 +78,9 @@
           prev-category = next
           if word.type == "ext" {
             context {
-              if word.word in libnimisin.nimisin-spellings.get() {
-                let data = libnimisin.nimisin-spellings.get().at(word.word)
-                let shorten = word.word in libnimisin.nimisin-shortenable.get()
+              if word.word in libnimisin.spellings.get() {
+                let data = libnimisin.spellings.get().at(word.word)
+                let shorten = word.word in libnimisin.shortenable.get()
                 let spelling = if shorten { data.short } else { data.full }
                 [#nasin-sitelen.Nimi(spelling)]
                 if not shorten {
