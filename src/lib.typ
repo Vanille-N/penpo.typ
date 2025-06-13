@@ -7,6 +7,7 @@
 #import "nimisin.typ" as libnimisin
 #import libnimisin: nimisin
 
+#import "kipisi.typ"
 #import "kipisi.typ": nimi-kipisi
 
 #let title-markup(line) = {
@@ -24,7 +25,7 @@
 }
 
 #let spacing-category(old, word) = {
-  if word.type == "ext" or word.type == "word" {
+  if word.type == "ext" or word.type == "word" or word.type == "content" {
     if old == "open" or old == "" { ([], "word") } else { ([ ], "word") } 
   } else if word.type == "punct" {
     if word.group == "open" {
@@ -56,6 +57,8 @@
             [#word.word]
           } else if word.type == "punct" {
             [#word.word]
+          } else if word.type == "content" {
+            [#word.val]
           } else {
             panic[#word.type]
           }
@@ -97,6 +100,8 @@
             [#word.word#word.var]
           } else if word.type == "punct" {
             [#word.symb]
+          } else if word.type == "content" {
+            [#nasin-sitelen.Lasina[#word.val]]
           } else {
             panic[#word.type]
           }

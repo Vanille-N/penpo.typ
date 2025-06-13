@@ -28,6 +28,8 @@
       "alpha"
     } else if char in (" ", "\t") {
       "blank"
+    } else if char == "\n" {
+      "newline"
     } else {
       "symb"
     }
@@ -44,46 +46,71 @@
   words
 }
 
-#let nimi-kipisi(txt) = {
-  let lines = txt.split("\n")
+#let nimi-kipisi(..txt) = {
+  let nimi = ()
+  for part in txt.pos() {
+    if type(part) == str {
+      for elem in segmentation(part) {
+        nimi.push(elem)
+      }
+    } else {
+      nimi.push(part)
+    }
+  }
+  nimi
+}
+
+#let nimi-li-seme(elems) = {
   let paragraphs = ()
   let paragraph = ()
+  let line = ()
   let errors = ()
-  for line in lines + ("",) {
-    if line == "" {
-      if paragraph != () {
+  for elem in elems {
+    if type(elem) == content {
+      line.push((type: "content", val: elem))
+    } else if type(elem) == str {
+      if elem == "\n" {
+        if line != () {
+          paragraph.push(line)
+          line = ()
+        }
+      } else if elem == "\n\n" {
+        paragraph.push(line)
+        line = ()
         paragraphs.push((par: paragraph, err: errors.filter(x => x != none)))
         paragraph = ()
         errors = ()
-      }
-      continue
-    }
-    let words = ()
-    for word in segmentation(line) {
-      let (word, variant) = detach-num(word)
-      if word in nimi.ale {
-        errors.push(pakala.pu-ala-pu(word, "nimi"))
-        let id = nimi.ale.at(word)
-        words.push((
-          type: "word",
-          var: sitelen-ante-nanpa(variant, max: id.maxvar),
-          word: word,
-        ))
-      } else if word in nimi.punctuation {
-        let id = nimi.punctuation.at(word)
-        id.insert("type", "punct")
-        words.push(id)
-      } else if word == "=" or word == "==" {
-        words.push((type: "fmt", symb: word))
       } else {
-        words.push((
-          type: "ext",
-          var: none,
-          word: word,
-        ))
+        let (word, variant) = detach-num(elem)
+        if word in nimi.ale {
+          errors.push(pakala.pu-ala-pu(word, "nimi"))
+          let id = nimi.ale.at(word)
+          line.push((
+            type: "word",
+            var: sitelen-ante-nanpa(variant, max: id.maxvar),
+            word: word,
+          ))
+        } else if word in nimi.punctuation {
+          let id = nimi.punctuation.at(word)
+          id.insert("type", "punct")
+          line.push(id)
+        } else if word == "=" or word == "==" {
+          line.push((type: "fmt", symb: word))
+        } else {
+          line.push((
+            type: "ext",
+            var: none,
+            word: word,
+          ))
+        }
       }
     }
-    paragraph.push(words)
+  }
+  if line != () {
+    paragraph.push(line)
+  }
+  if paragraph != () {
+    paragraphs.push((par: paragraph, err: errors.filter(x => x != none)))
   }
   paragraphs
 }

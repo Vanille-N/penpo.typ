@@ -1,0 +1,3 @@
+watch FILE:
+  typst watch --font-path=../sama-ni/fonts --root=.. {{FILE}}.typ {{FILE}}.pdf
+
