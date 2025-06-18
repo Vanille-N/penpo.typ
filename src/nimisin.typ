@@ -10,12 +10,16 @@
 #let shortenable = state(localize-label("shortenable"), (:))
 #let initials = state(localize-label("initials"), (:))
 
+// TODO: allow configuring when this is called
 #let nimisin-lili-forget() = {
   shortenable.update(_ => (:))
   initials.update(_ => (:))
 }
 
 #let nimisin-kama-lili(nimi, lili, spelling) = context {
+  if lili == none {
+    return
+  }
   shortenable.update(seen => {
     seen.insert(nimi, ())
     seen
@@ -34,7 +38,7 @@
   }
 }
 
-#let nimisin-wan(word) = (letters) => {
+#let nimisin(word, letters, _lili: auto) = {
   let errors = ()
   let letters = letters.split(" ").filter(w => w != "")
   if word.len() != letters.len() {
@@ -51,18 +55,17 @@
   }
   let chars = ()
   for char in letters {
-    let (char, variant) = kipisi.detach-num(char)
-    let char = if char in nimi.ale {
-      errors.push(pakala.pu-ala-pu(char, "sitelen"))
-      let variant = kipisi.sitelen-ante-nanpa(variant, max: nimi.ale.at(char).maxvar)
+    let (word, variant) = kipisi.of-word(char)
+    let word = if word in nimi.ale {
+      errors.push(pakala.pu-ala-pu(word, "sitelen", nanpa-ante: variant))
       char + aux.str-some(variant)
     } else {
       errors.push(pakala.sitelen-ala(char))
       "???"
     }
-    chars.push(char)
+    chars.push(char + aux.str-some(variant))
   }
-  for (letter, hieroglyph) in word.clusters().zip(letters) {
+  for (letter, hieroglyph) in word.clusters().zip(chars) {
     if hieroglyph.at(0) != "?" and lower(letter) != hieroglyph.at(0) {
       errors.push(pakala.sitelen-ante(letter, hieroglyph, word, letters))
     }
@@ -70,14 +73,37 @@
   for error in errors {
     error
   }
+  let short = if _lili == auto {
+    chars.slice(0, 1)
+  } else if _lili == none {
+    none
+  } else if type(_lili) == int {
+    chars.slice(0, _lili)
+  } else if type(_lili) == str {
+    let short = ()
+    for char in _lili.split(" ") {
+      let (word, variant) = kipisi.of-word(char)
+      let word = if word in nimi.ale {
+        errors.push(pakala.pu-ala-pu(word, "sitelen", nanpa-ante: variant))
+        word + aux.str-some(variant)
+      } else {
+        errors.push(pakala.sitelen-ala(char))
+        "???" // TODO: make it red in the text
+      }
+      short.push(word)
+    }
+    short
+  } else {
+    panic("_lili of type '" + str(type(_lili)) + "' cannot be interpreted.")
+  }
   spellings.update(nimi => {
-    nimi.insert(word, (full: chars, short: chars.slice(0, 1)))
+    nimi.insert(word, (full: chars, short: short))
     nimi
   })
 }
 
-#let nimisin(..args) = {
+#let nimisin-mute(_lili: auto, ..args) = {
   for (key, val) in args.named() {
-    nimisin-wan(key)(val)
+    nimisin(key, val, _lili: _lili)
   }
 }

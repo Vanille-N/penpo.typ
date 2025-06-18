@@ -5,7 +5,7 @@
 #import "kokosila.typ"
 
 #import "nimisin.typ" as libnimisin
-#import libnimisin: nimisin
+#import libnimisin: nimisin, nimisin-mute
 
 #import "kipisi.typ"
 #import "kipisi.typ": nimi-kipisi
@@ -51,10 +51,9 @@
           let (spacing, next) = spacing-category(prev-category, word)
           [#spacing]
           prev-category = next
-          if word.type == "ext" {
-            [#word.word]
-          } else if word.type == "word" {
-            [#word.word]
+          if word.type == "word" {
+            let (word,) = kipisi.of-word(word.word)
+            [#word]
           } else if word.type == "punct" {
             [#word.word]
           } else if word.type == "content" {
@@ -79,25 +78,24 @@
           let (spacing, next) = spacing-category(prev-category, word)
           [#spacing]
           prev-category = next
-          if word.type == "ext" {
-            context {
-              if word.word in libnimisin.spellings.get() {
-                let data = libnimisin.spellings.get().at(word.word)
-                let shorten = word.word in libnimisin.shortenable.get()
-                let spelling = if shorten { data.short } else { data.full }
-                [#nasin-sitelen.Nimi(spelling)]
-                if not shorten {
-                  libnimisin.nimisin-kama-lili(word.word, data.short, spelling)
-                }
-              } else {
-                [#text(fill: red, nasin-sitelen.Lasina[
-                  #{sym.angle.l}#{word.word}#{sym.angle.r}
-                ])]
-                pakala.pu-ala-pu(word.word, "nimi")
+          context if word.type == "word" {
+            let (word,variant) = kipisi.of-word(word.word)
+            if word in nimi.ale {
+              pakala.pu-ala-pu(word, "sitelen")
+              [#word#variant]
+            } else if word in libnimisin.spellings.get() {
+              let data = libnimisin.spellings.get().at(word)
+              let shorten = word in libnimisin.shortenable.get()
+              let spelling = if shorten { data.short } else { data.full }
+              [#nasin-sitelen.Nimi(spelling)]
+              if not shorten {
+                libnimisin.nimisin-kama-lili(word, data.short, spelling)
               }
+            } else {
+              [#text(fill: red, nasin-sitelen.Lasina[
+                #{sym.angle.l}#{word.word}#{sym.angle.r}
+              ])]
             }
-          } else if word.type == "word" {
-            [#word.word#word.var]
           } else if word.type == "punct" {
             [#word.symb]
           } else if word.type == "content" {
@@ -107,7 +105,7 @@
           }
         }
       }]]]
-      [\ ]
+      linebreak()
     }
     for a in paragraph.err { a }
   }))

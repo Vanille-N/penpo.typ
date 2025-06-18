@@ -58,8 +58,8 @@
 // (because they're trivial) but "=" and "==" are hardcoded elsewhere
 // (because those are much less easy to handle).
 #let punctuation = (
-  te: punct("\"", " te ", spacing: "open"),
-  to: punct("\"", " to "),
+  te: punct(smartquote(), " te ", spacing: "open"),
+  to: punct(smartquote(), " to "),
   ".": punct(".", ""),
   ":": punct(":", ""),
   "!": punct("!", ""),
@@ -137,7 +137,7 @@
   nasa: pu(),
   nasin: pu(),
   nena: pu(),
-  ni: pu(var: 2),
+  ni: pu(var: 8),
   nimi: pu(),
   noka: pu(),
   o: pu(),

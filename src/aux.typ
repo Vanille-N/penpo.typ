@@ -1,11 +1,19 @@
-// Conditional bold formatting.
-#let bold-if(b, t) = {
-  if b [*#t*] else [ #t ]
-}
+/// Auxiliary functions, not directly related to toki pona.
 
-// Bypass the fact that `none` is not `str`-able,
-// by turning `none` into `""`.
-#let str-some(x) = {
+/// Conditional bold formatting. -> content
+#let bold-if(
+  /// Whether the next parameter should be shown in bold. -> bool
+  bold,
+  /// Anything that can be turned into content. -> content | string | any
+  t,
+) = if bold [*#t*] else [ #t ]
+
+/// Bypass the fact that `none` is not `str`-able, by turning `none` into `""`.
+/// -> str
+#let str-some(
+  /// Content to stringify -> any
+  x,
+) = {
   if x == none {
     ""
   } else {
@@ -13,18 +21,30 @@
   }
 }
 
-// Global variables made unique.
-#let localize-label(file, lab) = "@penpo/" + file + ":" + lab
+/// Prefix global variables with a unique prefix to avoid collisions.
+/// -> str
+#let localize-label(
+  /// Filename. -> str
+  file,
+  /// Label. Must be unique in the file, but cross-file collisions are handled.
+  /// -> str
+  lab,
+) = "@penpo/" + file + ":" + lab
 
-// Creates a new logging triplet.
-// That is, a global variable that contains a log of errors is created
-// and closured into 3 functions:
-// - `begin` prints the errors in the log
-// - `push` adds a new error in the log
-// - `end` is a label that marks the end of the log
-//
-// `lab` should be globally unique.
-#let make-new-log(lab) = {
+/// Creates a new logging triplet.
+/// That is, a global variable that contains a log of errors is created
+/// and closured into 3 functions:
+/// - `begin` prints the errors in the log
+/// - `push` adds a new error in the log
+/// - `end` is a label that marks the end of the log
+///
+/// `lab` should be globally unique.
+/// -> (function, function, function)
+#let make-new-log(
+  /// Label to use. Must be unique across invocations of this function.
+  /// -> str
+  lab
+) = {
   let log = state(lab, (:))
   let lab = localize-label("aux", lab)
   // Label that marks the end of the collection of errors

@@ -101,9 +101,10 @@
     ])
   } else if meta.rarity == "sin" {
     pakala(orange, tag, 6, switch[
-      "#nimi" (#nasin-sitelen.seli-kiwen(nimi)) li lon ku suli ala
+      "#nimi" (#nasin-sitelen.seli-kiwen(nimi + aux.str-some(nanpa-ante)))
+      li lon ku suli ala
     ][
-      "#nimi" (#nasin-sitelen.seli-kiwen(nimi))
+      "#nimi" (#nasin-sitelen.seli-kiwen(nimi + aux.str-some(nanpa-ante)))
       is not in "ku suli" (obscure word)
     ])
   } else {

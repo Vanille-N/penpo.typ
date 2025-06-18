@@ -11,11 +11,23 @@
 }
 
 #let detach-num(word) = {
+  if type(word) != str { panic("detach-num expects a string!") }
   if "/" in word {
     let (word, num) = word.split("/")
     (word, int(num))
   } else {
     (word, 1)
+  }
+}
+
+#let of-word(word) = {
+  let (word, variant) = detach-num(word)
+  if word in nimi.ale {
+    let id = nimi.ale.at(word)
+    let variant = sitelen-ante-nanpa(variant, max: id.maxvar)
+    (word: word, variant: variant)
+  } else {
+    (word: word, variant: none)
   }
 }
 
@@ -80,29 +92,35 @@
         paragraphs.push((par: paragraph, err: errors.filter(x => x != none)))
         paragraph = ()
         errors = ()
+      } else if elem in nimi.punctuation {
+        let id = nimi.punctuation.at(elem)
+        id.insert("type", "punct")
+        line.push(id)
+      } else if elem == "=" or elem == "==" {
+        // TODO: validate that this comes at the beginning of a line somewhere ?
+        line.push((type: "fmt", symb: elem))
       } else {
-        let (word, variant) = detach-num(elem)
-        if word in nimi.ale {
-          errors.push(pakala.pu-ala-pu(word, "nimi"))
-          let id = nimi.ale.at(word)
-          line.push((
-            type: "word",
-            var: sitelen-ante-nanpa(variant, max: id.maxvar),
-            word: word,
-          ))
-        } else if word in nimi.punctuation {
-          let id = nimi.punctuation.at(word)
-          id.insert("type", "punct")
-          line.push(id)
-        } else if word == "=" or word == "==" {
-          line.push((type: "fmt", symb: word))
-        } else {
-          line.push((
-            type: "ext",
-            var: none,
-            word: word,
-          ))
-        }
+        line.push((
+          type: "word",
+          word: elem,
+        ))
+        //let (word, variant) = detach-num(elem)
+        //if word in nimi.ale {
+        //  let id = nimi.ale.at(word)
+        //  let variant = sitelen-ante-nanpa(variant, max: id.maxvar)
+        //  errors.push(pakala.pu-ala-pu(word, "nimi", nanpa-ante: variant))
+        //  line.push((
+        //    type: "word",
+        //    var: variant,
+        //    word: word,
+        //  ))
+        //} else {
+        //  line.push((
+        //    type: "ext",
+        //    var: none,
+        //    word: word,
+        //  ))
+        //}
       }
     }
   }
