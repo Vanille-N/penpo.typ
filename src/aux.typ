@@ -75,3 +75,18 @@
   (begin, push, end)
 }
 
+// TODO: doc
+#let autospace(left, right) = {
+  let nb = if left == none or right == none {
+    none
+  } else {
+    calc.max(left, right)
+  }
+  if nb == none or nb == 0 {
+    []
+  } else if nb == 1 {
+    [ ]
+  } else {
+    [  ]
+  }
+}

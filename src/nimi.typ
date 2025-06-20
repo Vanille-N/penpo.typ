@@ -45,10 +45,9 @@
 )
 
 // This is a punctuation symbol.
-#let punct(word, symb, spacing: "close") = (
+#let punct(word, group: "close") = (
   word: word,
-  symb: symb,
-  group: spacing,
+  group: group,
 )
 
 // Set of punctuation markers.
@@ -58,18 +57,18 @@
 // (because they're trivial) but "=" and "==" are hardcoded elsewhere
 // (because those are much less easy to handle).
 #let punctuation = (
-  te: punct(smartquote(), " te ", spacing: "open"),
-  to: punct(smartquote(), " to "),
-  ".": punct(".", ""),
-  ":": punct(":", ""),
-  "!": punct("!", ""),
-  ",": punct(",", ""),
-  "?": punct("?", ""),
-  "(": punct("(", [#h(2mm)---], spacing: "open"),
-  ")": punct(")", [---#h(2mm)]),
-  "~": punct("", h(2.5mm)),
-  "~~": punct("", h(5mm)),
-  "\\": punct(linebreak(), ""),
+  te: punct("te", group: "open"),
+  to: punct("to"),
+  ".": punct("."),
+  ":": punct(":"),
+  "!": punct("!"),
+  ",": punct(","),
+  "?": punct("?"),
+  "(": punct("(", group: "open"),
+  ")": punct(")"),
+  "~": punct("~"),
+  "~~": punct("~~"),
+  "\\": punct("\\"),
 )
 
 /// Record of all existing words.

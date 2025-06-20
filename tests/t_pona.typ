@@ -25,12 +25,8 @@
 
 #penpo.pakala.open()
 
-#render("
+#let words = segment("
 == mun Masi
-
-Newen Newen
-
-penpo n majuna
 
 suno mi la, mun Masi (toki Inli:", ["Mars"], ")
 ~ li mun nanpa tu tu lon weka suno Sola.
@@ -59,5 +55,13 @@ mun lili tu li sike e mun Masi.
 nimi ona li mun Popo li mun Temo.
 ona li kiwen li sike lukin ala.
 ")
+
+#show-Lasina(words)
+
+#show-pona(words)
+
+#show-hangul(words)
+
+#show-kanji(words)
 
 #penpo.pakala.pini()

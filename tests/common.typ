@@ -1,11 +1,37 @@
 #import "../src/lib.typ" as penpo
 
-#let render(..txt) = {
-  let words = penpo.kipisi.nimi-li-seme(penpo.nimi-kipisi(..txt.pos()))
+#let segment(..txt) = {
+  penpo.kipisi.nimi-li-seme(penpo.nimi-kipisi(..txt.pos()))
+}
+
+#let show-Lasina(words) = {
   table(
     stroke: none,
-    columns: (1fr, 1fr),
-    ..penpo.sitelen-Lasina(words).zip(penpo.sitelen-pona(words)).flatten()
+    columns: 1,
+    ..penpo.sitelen-Lasina(words)
   )
 }
 
+#let show-pona(words) = {
+  table(
+    stroke: none,
+    columns: 1,
+    ..penpo.sitelen-pona(words)
+  )
+}
+
+#let show-kanji(words) = {
+  table(
+    stroke: none,
+    columns: 1,
+    ..penpo.kanji.sitelen(words)
+  )
+}
+
+#let show-hangul(words) = {
+  table(
+    stroke: none,
+    columns: 1,
+    ..penpo.hangul.sitelen(words)
+  )
+}

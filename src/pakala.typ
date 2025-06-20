@@ -22,17 +22,20 @@
 
 #let (open-aux, pakala, pini) = aux.make-new-log("pakala")
 
+/// Start collecting errors. Call this wherever you want the error log
+/// to appear. -> content
 #let open() = open-aux(switch[lipu ni li jo e pakala lili:][The following typos have been detected:])
 
+/// Letter is lowercase but should be uppercase.
 #let lili-ike(lili, nimi) = {
-  let tag = "uppercase("+nimi+")"
+  let tag = "lowercase("+nimi+")"
   pakala(red, tag, 4, switch[
     "#lili" lon "#nimi" li lili ike
   ]["#lili" in the name "#nimi" should be uppercase])
 }
 
 #let suli-ike(lili, nimi) = {
-  let tag = "lowercase("+lili+","+nimi+")"
+  let tag = "uppercase("+lili+","+nimi+")"
   pakala(red, tag, 5, switch[
     "#lili" lon "#nimi" li suli ike
   ]["#lili" in the name "#nimi" should be lowercase])
@@ -84,29 +87,29 @@
   let meta = nimi-ale.at(nimi, default: none)
   let tag = "rarity-"+seme+"("+nimi+")"
   if meta == none {
-    pakala(red, tag, 0, switch[
+    (color: red, log: pakala(red, tag, 0, switch[
       "#nimi" li lon ala
-    ]["#nimi" is not a known word])
+    ]["#nimi" is not a known word]))
   } else if meta.group != "word" {
     none
   } else if meta.rarity == "pu" {
     none
   } else if meta.rarity == "ku" {
-    pakala(orange, tag, 7, switch[
+    (color: orange, log: pakala(orange, tag, 7, switch[
       "#nimi" (#nasin-sitelen.seli-kiwen(nimi + aux.str-some(nanpa-ante)))
       li lon pu ala
     ][
       "#nimi" (#nasin-sitelen.seli-kiwen(nimi + aux.str-some(nanpa-ante)))
       is not in "pu" (rare word)
-    ])
+    ]))
   } else if meta.rarity == "sin" {
-    pakala(orange, tag, 6, switch[
+    (color: orange, log: pakala(orange, tag, 6, switch[
       "#nimi" (#nasin-sitelen.seli-kiwen(nimi + aux.str-some(nanpa-ante)))
       li lon ku suli ala
     ][
       "#nimi" (#nasin-sitelen.seli-kiwen(nimi + aux.str-some(nanpa-ante)))
       is not in "ku suli" (obscure word)
-    ])
+    ]))
   } else {
     panic[Rarity #meta.rarity is malformed]
   }

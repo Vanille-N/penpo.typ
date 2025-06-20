@@ -4,6 +4,9 @@
 #import "pakala.typ"
 #import "kokosila.typ"
 
+#import "hangul.typ"
+#import "kanji.typ"
+
 #import "nimisin.typ" as libnimisin
 #import libnimisin: nimisin, nimisin-mute
 
@@ -24,38 +27,53 @@
   }
 }
 
-#let spacing-category(old, word) = {
-  if word.type == "ext" or word.type == "word" or word.type == "content" {
-    if old == "open" or old == "" { ([], "word") } else { ([ ], "word") } 
-  } else if word.type == "punct" {
-    if word.group == "open" {
-      ([ ], word.group)
-    } else {
-      ([], word.group)
-    }
-  } else {
-    panic[spacing-category of #word.type]
-  }
+#let interp-Lasina = state(aux.localize-label("Lasina", "punct"), (
+  ".": (none, [.], 1),
+  ",": (none, [,], 1),
+  "!": (none, [!], 1),
+  "?": (none, [?], 1),
+  "te": (1, smartquote(), none),
+  "to": (none, smartquote(), 1),
+  "(": (1, [(], none),
+  ")": (none, [)], 1),
+  "~": (none, none, none),
+  "~~": (none, none, none),
+))
+
+#let punct-interp-Lasina(word) = {
+  interp-Lasina.get().at(word, default: [#text(fill: red, nasin-sitelen.Lasina[
+    #{sym.angle.l}#{word}#{sym.angle.r}
+  ])])
 }
 
 #let sitelen-Lasina(structure) = {
-  structure.map(paragraph => par(justify: true, {
+  structure.map(paragraph => context par(justify: true, {
     let prev-category = ""
-    for line in paragraph.par {
+    for line in paragraph {
       let (size, bold, line) = title-markup(line)
       if bold {
         libnimisin.nimisin-lili-forget()
       }
       text(size: size)[#aux.bold-if(bold)[#{
+        let prevspace = none
         for word in line {
-          let (spacing, next) = spacing-category(prev-category, word)
-          [#spacing]
-          prev-category = next
+          let (space-pre, space-post) = {
+            if word.type == "word" {
+              (1, 1)
+            } else if word.type == "punct" {
+              let (pre, _, post) = punct-interp-Lasina(word.word)
+              (pre, post)
+            } else {
+              (0, 0)
+            }
+          }
+          aux.autospace(prevspace, space-pre)
+          prevspace = space-post
           if word.type == "word" {
             let (word,) = kipisi.of-word(word.word)
             [#word]
           } else if word.type == "punct" {
-            [#word.word]
+            [#punct-interp-Lasina(word.word).at(1)]
           } else if word.type == "content" {
             [#word.val]
           } else {
@@ -64,25 +82,43 @@
         }
       }]]
     }
-    for a in paragraph.err { a }
   }))
 }
 
+#let interp-pona = state(aux.localize-label("pona", "punct"), (
+  ",": (none, [ ], none),
+  ".": (none, [#h(5mm)], none),
+  "~": (none, [#h(2mm)], none),
+  "~~": (none, [#h(5mm)], none),
+  "(": (none, [#h(3mm)---], none),
+  ")": (none, [---#h(3mm)], none),
+  te: (none, [ te ], none),
+  to: (none, [ to ], none),
+))
+
+#let punct-interp-pona(word) = {
+  interp-pona.get().at(word, default: [#text(fill: red, nasin-sitelen.Lasina[
+    #{sym.angle.l}#{word}#{sym.angle.r}
+  ])])
+}
+
 #let sitelen-pona(structure) = {
-  structure.map(paragraph => par(justify: true, {
+  structure.map(paragraph => context par(justify: true, {
     let prev-category = ""
-    for line in paragraph.par {
+    for line in paragraph {
       let (size, bold, line) = title-markup(line)
       text(size: size)[#nasin-sitelen.seli-kiwen[#aux.bold-if(bold)[#{
         for word in line {
-          let (spacing, next) = spacing-category(prev-category, word)
-          [#spacing]
-          prev-category = next
           context if word.type == "word" {
             let (word,variant) = kipisi.of-word(word.word)
             if word in nimi.ale {
-              pakala.pu-ala-pu(word, "sitelen")
-              [#word#variant]
+              let err = pakala.pu-ala-pu(word, "sitelen")
+              if err != none {
+                err.log
+                text(fill: err.color)[#word#variant]
+              } else {
+                [#word#variant]
+              }
             } else if word in libnimisin.spellings.get() {
               let data = libnimisin.spellings.get().at(word)
               let shorten = word in libnimisin.shortenable.get()
@@ -92,12 +128,14 @@
                 libnimisin.nimisin-kama-lili(word, data.short, spelling)
               }
             } else {
-              [#text(fill: red, nasin-sitelen.Lasina[
-                #{sym.angle.l}#{word.word}#{sym.angle.r}
+              let (color, log) = pakala.pu-ala-pu(word, "sitelen")
+              log
+              [#text(fill: color, nasin-sitelen.Lasina[
+                #{sym.angle.l}#{word}#{sym.angle.r}
               ])]
             }
           } else if word.type == "punct" {
-            [#word.symb]
+            punct-interp-pona(word.word).at(1)
           } else if word.type == "content" {
             [#nasin-sitelen.Lasina[#word.val]]
           } else {
@@ -107,7 +145,6 @@
       }]]]
       linebreak()
     }
-    for a in paragraph.err { a }
   }))
 }
 

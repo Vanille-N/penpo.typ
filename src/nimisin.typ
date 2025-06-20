@@ -57,13 +57,16 @@
   for char in letters {
     let (word, variant) = kipisi.of-word(char)
     let word = if word in nimi.ale {
-      errors.push(pakala.pu-ala-pu(word, "sitelen", nanpa-ante: variant))
+      let err = pakala.pu-ala-pu(word, "sitelen", nanpa-ante: variant)
+      if err != none {
+        errors.push(err.log)
+      }
       char + aux.str-some(variant)
     } else {
       errors.push(pakala.sitelen-ala(char))
       "???"
     }
-    chars.push(char + aux.str-some(variant))
+    chars.push(word)
   }
   for (letter, hieroglyph) in word.clusters().zip(chars) {
     if hieroglyph.at(0) != "?" and lower(letter) != hieroglyph.at(0) {
@@ -84,7 +87,9 @@
     for char in _lili.split(" ") {
       let (word, variant) = kipisi.of-word(char)
       let word = if word in nimi.ale {
-        errors.push(pakala.pu-ala-pu(word, "sitelen", nanpa-ante: variant))
+        let (color, log) = pakala.pu-ala-pu(word, "sitelen", nanpa-ante: variant)
+        // TODO: use bad
+        errors.push(log)
         word + aux.str-some(variant)
       } else {
         errors.push(pakala.sitelen-ala(char))

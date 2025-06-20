@@ -4,13 +4,12 @@
 
 #let seli-kiwen(t) = {
   text(font: "sitelen seli kiwen asuki")[#t]
+  //text[#t]
 }
 
 #let Nimi(spelling) = {
   seli-kiwen[
-    [#{
-      for chr in spelling { [#chr ] }
-    }]
+    [#{spelling.join([ ])}]
   ]
 }
 
