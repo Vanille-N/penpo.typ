@@ -1,6 +1,7 @@
 #import "aux.typ"
 #import "nimi.typ"
 #import "pakala.typ"
+#import "split.typ"
 
 /// Return `var` only if between `1` and `max`.
 ///
@@ -117,7 +118,8 @@
       }
     }
   }
-  words
+  //words
+  split.segment(line)
 }
 
 /// Turns an alternation of `str` and `content` into a stream of tokens.

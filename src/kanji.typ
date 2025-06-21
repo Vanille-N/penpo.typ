@@ -112,22 +112,22 @@
   }
 }
 
-// TODO: handle spacing
 #let interp-kanji = state(aux.localize-label("kanji", "punct"), (
-  ",": [ ],
-  ".": [#h(5mm)],
-  "~": [#h(2mm)],
-  "~~": [#h(5mm)],
-  "(": [#h(3mm)---],
-  ")": [---#h(3mm)],
-  te: [ te ],
-  to: [ to ],
+  ",": (none, [,], 1),
+  ".": (none, [.], 1),
+  ":": (none, [:], 1),
+  "~": (none, [#h(2mm)], none),
+  "~~": (none, [#h(5mm)], none),
+  "(": (none, [#h(3mm)---], none),
+  ")": (none, [---#h(3mm)], none),
+  te: (1, [「], none),
+  to: (none, [」], 1),
 ))
 
-#let punct-interp-kanji(word) = context {
-  interp-kanji.get().at(word, default: [#text(fill: red, nasin-sitelen.Lasina[
+#let punct-interp-kanji(word) = {
+  interp-kanji.get().at(word, default: (1, [#text(fill: red, nasin-sitelen.Lasina[
     #{sym.angle.l}#{word}#{sym.angle.r}
-  ])])
+  ])], 1))
 }
 
 #let sitelen(structure) = {
@@ -160,7 +160,7 @@
               ])]
             }
           } else if word.type == "punct" {
-            punct-interp-kanji(word.word)
+            punct-interp-kanji(word.word).at(1)
           } else if word.type == "content" {
             [#nasin-sitelen.Lasina[#word.val]]
           } else {

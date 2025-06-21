@@ -6,6 +6,8 @@
 #import "nimisin.typ" as libnimisin
 
 #let chart = (
+  n: [ㄴ],
+
   a: [아], an: [안], o: [오], on: [온],
   e: [에], en: [엔], u: [우], un: [운],
   i: [이], "in": [인],
@@ -151,10 +153,10 @@
   }
 }
 
-// TODO: handle spacing
 #let interp-hangul = state(aux.localize-label("hangul", "punct"), (
   ",": (none, [,], 1),
   ".": (none, [.], 1),
+  ":": (none, [:], 1),
   "~": (none, [#h(2mm)], none),
   "~~": (none, [#h(5mm)], none),
   "(": (none, [#h(3mm)---], none),
@@ -164,9 +166,9 @@
 ))
 
 #let punct-interp-hangul(word) = {
-  interp-hangul.get().at(word, default: [#text(fill: red, nasin-sitelen.Lasina[
+  interp-hangul.get().at(word, default: (1, [#text(fill: red, nasin-sitelen.Lasina[
     #{sym.angle.l}#{word}#{sym.angle.r}
-  ])])
+  ])], 1))
 }
 
 #let sitelen(structure) = {

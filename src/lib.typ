@@ -30,6 +30,7 @@
 #let interp-Lasina = state(aux.localize-label("Lasina", "punct"), (
   ".": (none, [.], 1),
   ",": (none, [,], 1),
+  ":": (none, [:], 1),
   "!": (none, [!], 1),
   "?": (none, [?], 1),
   "te": (1, smartquote(), none),
@@ -41,9 +42,9 @@
 ))
 
 #let punct-interp-Lasina(word) = {
-  interp-Lasina.get().at(word, default: [#text(fill: red, nasin-sitelen.Lasina[
+  interp-Lasina.get().at(word, default: (1, [#text(fill: red, nasin-sitelen.Lasina[
     #{sym.angle.l}#{word}#{sym.angle.r}
-  ])])
+  ])], 1))
 }
 
 #let sitelen-Lasina(structure) = {
@@ -88,6 +89,7 @@
 #let interp-pona = state(aux.localize-label("pona", "punct"), (
   ",": (none, [ ], none),
   ".": (none, [#h(5mm)], none),
+  ":": (none, [#h(1mm)], none),
   "~": (none, [#h(2mm)], none),
   "~~": (none, [#h(5mm)], none),
   "(": (none, [#h(3mm)---], none),
@@ -97,9 +99,9 @@
 ))
 
 #let punct-interp-pona(word) = {
-  interp-pona.get().at(word, default: [#text(fill: red, nasin-sitelen.Lasina[
+  interp-pona.get().at(word, default: (1, [#text(fill: red, nasin-sitelen.Lasina[
     #{sym.angle.l}#{word}#{sym.angle.r}
-  ])])
+  ])], 1))
 }
 
 #let sitelen-pona(structure) = {
