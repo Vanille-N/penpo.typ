@@ -24,22 +24,6 @@
   }
 }
 
-/// Split the string to interpret it as a word an a variant number.
-/// -> (str, int)
-#let detach-num(
-  /// Word to split in the format `"word/n"` for the `n`'th variant of `"word"`
-  /// -> str
-  word
-) = {
-  if type(word) != str { panic("detach-num expects a string!") }
-  if "/" in word {
-    let (word, num) = word.split("/")
-    (word, int(num))
-  } else {
-    (word, 1)
-  }
-}
-
 /// Wraps together `detach-num` and `clamp` to split the word and validate
 /// the variant number.
 /// -> dict
@@ -48,78 +32,20 @@
   /// -> str
   word
 ) = {
-  let (word, variant) = detach-num(word)
-  if word in nimi.ale {
-    let id = nimi.ale.at(word)
-    let variant = clamp(variant, max: id.maxvar)
-    (word: word, variant: variant)
-  } else {
-    (word: word, variant: none)
-  }
-}
-
-/// Cuts a text in tokens.
-/// This function assumes that a token is a maximal sequence of characters
-/// from the same category among
-/// - alphanumeric: 'a'-'z', 'A'-'Z', '0'-'9', '/'
-/// - blank: ' ', '\t'
-/// - linebreaks: '\n'
-/// - symbols: everything else
-#let segmentation(
-  /// -> str
-  line
-) = {
-  let group(chr) = {
-    if ("a" <= chr and chr <= "z") or ("A" <= chr and chr <= "Z") {
-      "alpha"
-    } else if chr == " " {
-      "blank"
-    } else if chr == "\n" {
-      "break"
-    } else {
-      "other"
+  let elems = word.split("/")
+  let sem = (base: elems.at(0), var: none)
+  for elem in elems.slice(1) {
+    // If it's `int`able, we interpret it as a variant number
+    let int-like = elem.clusters().all(c => "0" <= c and c <= "9")
+    if int-like {
+      if sem.var != none { panic("Duplicate int markers") }
+      sem.insert("var", int(elem))
+      continue
     }
+    // Otherwise it's just a string in the options
+    panic("Unimplemented")
   }
-  let extract(tok) = tok.tok
-  let extends(tok, chr) = {
-    if tok.group == "blank" {
-      (false, (tok:none))
-    } else if tok.tok + chr in ("==", "~~", "\n\n") {
-      tok.tok += chr
-      (true, tok)
-    } else if tok.group == "alpha" {
-      if ("a" <= chr and chr <= "z") or ("A" <= chr and chr <= "Z") {
-        tok.tok += chr
-        (true, tok)
-      } else if (chr == "/") or ("0" <= chr and chr <= "9") {
-        tok.tok += chr
-        (true, tok)
-      } else {
-        (false, tok)
-      }
-    } else {
-      (false, tok)
-    }
-  }
-  let words = ()
-  let idx = 0
-  while idx < line.len() {
-    let tok = (group: group(line.at(idx)), tok: line.at(idx))
-    idx += 1
-    while idx < line.len() {
-      let add = line.at(idx)
-      let (ans, newtok) = extends(tok, add)
-      if ans {
-        tok = newtok
-        idx += 1
-      } else {
-        words.push(extract(newtok))
-        break
-      }
-    }
-  }
-  //words
-  split.segment(line)
+  sem
 }
 
 /// Turns an alternation of `str` and `content` into a stream of tokens.
@@ -132,7 +58,7 @@
   let nimi = ()
   for part in txt.pos() {
     if type(part) == str {
-      for elem in segmentation(part) {
+      for elem in split.into-segments(part) {
         nimi.push(elem)
       }
     } else {

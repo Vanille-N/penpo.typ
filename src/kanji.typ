@@ -141,17 +141,17 @@
           [#spacing]
           prev-category = next
           context if word.type == "word" {
-            let (word, variant) = kipisi.of-word(word.word)
-            if word in nimi.ale {
-              let err = pakala.pu-ala-pu(word, "kansi")
+            let (base, var) = kipisi.of-word(word.word)
+            if base in nimi.ale {
+              let err = pakala.pu-ala-pu(base, "kansi")
               if err != none {
                 err.log
                 text(fill: err.color)[#translit(word)]
               } else {
-                translit(word)
+                translit(base)
               }
-            } else if word in libnimisin.spellings.get() {
-              translit(word)
+            } else if base in libnimisin.spellings.get() {
+              translit(base)
             } else {
               let (color, log) = pakala.pu-ala-pu(word, "sitelen")
               log

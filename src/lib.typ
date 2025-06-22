@@ -71,8 +71,8 @@
           aux.autospace(prevspace, space-pre)
           prevspace = space-post
           if word.type == "word" {
-            let (word,) = kipisi.of-word(word.word)
-            [#word]
+            let (base,) = kipisi.of-word(word.word)
+            [#base]
           } else if word.type == "punct" {
             [#punct-interp-Lasina(word.word).at(1)]
           } else if word.type == "content" {
@@ -112,22 +112,22 @@
       text(size: size)[#nasin-sitelen.seli-kiwen[#aux.bold-if(bold)[#{
         for word in line {
           context if word.type == "word" {
-            let (word,variant) = kipisi.of-word(word.word)
-            if word in nimi.ale {
-              let err = pakala.pu-ala-pu(word, "sitelen")
+            let (base, var) = kipisi.of-word(word.word)
+            if base in nimi.ale {
+              let err = pakala.pu-ala-pu(base, "sitelen", nanpa-ante: var)
               if err != none {
                 err.log
                 text(fill: err.color)[#word#variant]
               } else {
-                [#word#variant]
+                [#base#var]
               }
-            } else if word in libnimisin.spellings.get() {
-              let data = libnimisin.spellings.get().at(word)
-              let shorten = word in libnimisin.shortenable.get()
+            } else if base in libnimisin.spellings.get() {
+              let data = libnimisin.spellings.get().at(base)
+              let shorten = base in libnimisin.shortenable.get()
               let spelling = if shorten { data.short } else { data.full }
               [#nasin-sitelen.Nimi(spelling)]
               if not shorten {
-                libnimisin.nimisin-kama-lili(word, data.short, spelling)
+                libnimisin.nimisin-kama-lili(base, data.short, spelling)
               }
             } else {
               let (color, log) = pakala.pu-ala-pu(word, "sitelen")

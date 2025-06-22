@@ -74,7 +74,7 @@
   (txt.slice(0, i), i)
 }
 
-#let segment(txt) = {
+#let into-segments(txt) = {
   let fragments = ()
   let start = 0
   while start < txt.len() {
@@ -108,7 +108,7 @@
 
 #let test(input, expected) = rect({
   let expected = expected.split("|")
-  let output = segment(input)
+  let output = into-segments(input)
   if output == expected {
     text(fill: green)[All OK]
     return

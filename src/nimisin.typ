@@ -55,13 +55,13 @@
   }
   let chars = ()
   for char in letters {
-    let (word, variant) = kipisi.of-word(char)
-    let word = if word in nimi.ale {
-      let err = pakala.pu-ala-pu(word, "sitelen", nanpa-ante: variant)
+    let (base, var) = kipisi.of-word(char)
+    let word = if base in nimi.ale {
+      let err = pakala.pu-ala-pu(base, "sitelen", nanpa-ante: var)
       if err != none {
         errors.push(err.log)
       }
-      char + aux.str-some(variant)
+      char + aux.str-some(var)
     } else {
       errors.push(pakala.sitelen-ala(char))
       "???"
@@ -85,12 +85,12 @@
   } else if type(_lili) == str {
     let short = ()
     for char in _lili.split(" ") {
-      let (word, variant) = kipisi.of-word(char)
-      let word = if word in nimi.ale {
-        let (color, log) = pakala.pu-ala-pu(word, "sitelen", nanpa-ante: variant)
+      let (base, var) = kipisi.of-word(char)
+      let word = if base in nimi.ale {
+        let (color, log) = pakala.pu-ala-pu(base, "sitelen", nanpa-ante: var)
         // TODO: use bad
         errors.push(log)
-        word + aux.str-some(variant)
+        word + aux.str-some(var)
       } else {
         errors.push(pakala.sitelen-ala(char))
         "???" // TODO: make it red in the text
