@@ -5,9 +5,18 @@
 #import "nasin-sitelen.typ"
 #import "nimisin.typ" as libnimisin
 
-#let chart = (
-  n: [ん],
+// TODO: Use quotes not te/to
 
+#let special-words = (
+  n: [ん],
+  nya: [にゃ],
+  yupekosi: [ジュぺこし],
+  wuwojiti: [ううをイィティ],
+)
+
+// TODO: The chart is off-by-1. Proofread.
+#let chart = (
+   n: [ん],
    a: [あ],  i: [い],  u: [う],  e: [え],  o: [お],
   pa: [あ], pi: [い], pu: [う], pe: [え], po: [お],
   ka: [ぱ], ki: [ぴ], ku: [ぷ], ke: [ぺ], ko: [ぽ],
@@ -68,20 +77,24 @@
 }
 
 #let translit(sentence) = {
-  segments(sentence).map(s => {
-    if lower(s) in chart {
-      let ans = chart.at(lower(s))
-      if ans == none {
-        box(fill: red, inset: 0pt)[#s]
-      } else if s == lower(s) {
-        ans
+  if sentence in special-words {
+    special-words.at(sentence)
+  } else {
+    segments(sentence).map(s => {
+      if lower(s) in chart {
+        let ans = chart.at(lower(s))
+        if ans == none {
+          box(fill: red, inset: 0pt)[#s]
+        } else if s == lower(s) {
+          ans
+        } else {
+          strong(ans) // TODO: fix the strong not showing up
+        }
       } else {
-        strong(ans) // TODO: fix the strong not showing up
+        box(fill: red, inset: 2pt)[#s]
       }
-    } else {
-      box(fill: red, inset: 2pt)[#s]
-    }
-  }).join([])
+    }).join([])
+  }
 }
 
 #let title-markup(line) = {

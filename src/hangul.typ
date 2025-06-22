@@ -5,10 +5,16 @@
 #import "nasin-sitelen.typ"
 #import "nimisin.typ" as libnimisin
 
-#let chart = (
-  n: [ㄴ],
-  nja: [냐], // TODO: use this
+// TODO: Use quotes not te/to
 
+#let special-words = (
+  n: [ㄴ],
+  nja: [냐],
+  yupekosi: [쥬베고시],
+  wuwojiti: [우우오오이이티],
+)
+
+#let chart = (
   a: [아], an: [안], o: [오], on: [온],
   e: [에], en: [엔], u: [우], un: [운],
   i: [이], "in": [인],
@@ -109,20 +115,24 @@
 
 #let translit(sentence) = {
   text(font: "Noto Serif KR", {
-    segments(sentence).map(s => {
-      if lower(s) in chart {
-        let ans = chart.at(lower(s))
-        if ans == none {
-          box(fill: red, inset: 0pt)[#s]
-        } else if s == lower(s) {
-          ans
+    if sentence in special-words {
+      special-words.at(sentence)
+    } else {
+      segments(sentence).map(s => {
+        if lower(s) in chart {
+          let ans = chart.at(lower(s))
+          if ans == none {
+            box(fill: red, inset: 0pt)[#s]
+          } else if s == lower(s) {
+            ans
+          } else {
+            strong(ans)
+          }
         } else {
-          strong(ans)
+          box(fill: red, inset: 2pt)[#s]
         }
-      } else {
-        box(fill: red, inset: 2pt)[#s]
-      }
-    }).join([])
+      }).join([])
+    }
   })
 }
 
