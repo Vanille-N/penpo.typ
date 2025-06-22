@@ -111,6 +111,8 @@
       let (size, bold, line) = title-markup(line)
       text(size: size)[#nasin-sitelen.seli-kiwen[#aux.bold-if(bold)[#{
         for word in line {
+          // TODO: improve spacing
+          [ ]
           context if word.type == "word" {
             let (base, var) = kipisi.of-word(word.word)
             if base in nimi.ale {

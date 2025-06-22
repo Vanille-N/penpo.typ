@@ -7,6 +7,7 @@
 
 #let chart = (
   n: [ㄴ],
+  nja: [냐], // TODO: use this
 
   a: [아], an: [안], o: [오], on: [온],
   e: [에], en: [엔], u: [우], un: [운],
