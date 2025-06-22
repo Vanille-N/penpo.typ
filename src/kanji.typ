@@ -143,20 +143,20 @@
           context if word.type == "word" {
             let (base, var) = kipisi.of-word(word.word)
             if base in nimi.ale {
-              let err = pakala.pu-ala-pu(base, "kansi")
+              let err = pakala.pu-ala-pu(base, "kanji")
               if err != none {
                 err.log
-                text(fill: err.color)[#translit(word)]
+                text(fill: err.color)[#translit(base)]
               } else {
                 translit(base)
               }
             } else if base in libnimisin.spellings.get() {
               translit(base)
             } else {
-              let (color, log) = pakala.pu-ala-pu(word, "sitelen")
+              let (color, log) = pakala.pu-ala-pu(base, "sitelen")
               log
               [#text(fill: color, nasin-sitelen.Lasina[
-                #{sym.angle.l}#{word}#{sym.angle.r}
+                #{sym.angle.l}#{base}#{sym.angle.r}
               ])]
             }
           } else if word.type == "punct" {

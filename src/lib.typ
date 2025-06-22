@@ -117,7 +117,7 @@
               let err = pakala.pu-ala-pu(base, "sitelen", nanpa-ante: var)
               if err != none {
                 err.log
-                text(fill: err.color)[#word#variant]
+                text(fill: err.color)[#base#var]
               } else {
                 [#base#var]
               }
@@ -130,10 +130,10 @@
                 libnimisin.nimisin-kama-lili(base, data.short, spelling)
               }
             } else {
-              let (color, log) = pakala.pu-ala-pu(word, "sitelen")
+              let (color, log) = pakala.pu-ala-pu(base, "sitelen")
               log
               [#text(fill: color, nasin-sitelen.Lasina[
-                #{sym.angle.l}#{word}#{sym.angle.r}
+                #{sym.angle.l}#{base}#{sym.angle.r}
               ])]
             }
           } else if word.type == "punct" {
