@@ -1,0 +1,2 @@
+watch:
+  typst watch --root=.. --font-path=../fonts docs.typ docs.pdf
