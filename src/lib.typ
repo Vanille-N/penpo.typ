@@ -116,7 +116,7 @@
           context if word.type == "word" {
             let (base, var) = kipisi.of-word(word.word)
             if base in nimi.ale {
-              let err = pakala.pu-ala-pu(base, "sitelen", nanpa-ante: var)
+              let err = pakala.pu-ala-pu(base, nanpa-ante: var)
               if err != none {
                 err.log
                 text(fill: err.color)[#base#var]
@@ -132,7 +132,7 @@
                 libnimisin.nimisin-kama-lili(base, data.short, spelling)
               }
             } else {
-              let (color, log) = pakala.pu-ala-pu(base, "sitelen")
+              let (color, log) = pakala.pu-ala-pu(base)
               log
               [#text(fill: color, nasin-sitelen.Lasina[
                 #{sym.angle.l}#{base}#{sym.angle.r}

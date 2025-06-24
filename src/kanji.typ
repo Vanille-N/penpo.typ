@@ -156,7 +156,7 @@
           context if word.type == "word" {
             let (base, var) = kipisi.of-word(word.word)
             if base in nimi.ale {
-              let err = pakala.pu-ala-pu(base, "kanji")
+              let err = pakala.pu-ala-pu(base)
               if err != none {
                 err.log
                 text(fill: err.color)[#translit(base)]
@@ -166,11 +166,9 @@
             } else if base in libnimisin.spellings.get() {
               translit(base)
             } else {
-              let (color, log) = pakala.pu-ala-pu(base, "sitelen")
+              let (color, log) = pakala.pu-ala-pu(base)
               log
-              [#text(fill: color, nasin-sitelen.Lasina[
-                #{sym.angle.l}#{base}#{sym.angle.r}
-              ])]
+              text(fill: color)[#translit(base)]
             }
           } else if word.type == "punct" {
             punct-interp-kanji(word.word).at(1)

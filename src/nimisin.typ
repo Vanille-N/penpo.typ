@@ -57,7 +57,7 @@
   for char in letters {
     let (base, var) = kipisi.of-word(char)
     let word = if base in nimi.ale {
-      let err = pakala.pu-ala-pu(base, "sitelen", nanpa-ante: var)
+      let err = pakala.pu-ala-pu(base, nanpa-ante: var)
       if err != none {
         errors.push(err.log)
       }
@@ -87,7 +87,7 @@
     for char in _lili.split(" ") {
       let (base, var) = kipisi.of-word(char)
       let word = if base in nimi.ale {
-        let (color, log) = pakala.pu-ala-pu(base, "sitelen", nanpa-ante: var)
+        let (color, log) = pakala.pu-ala-pu(base, nanpa-ante: var)
         // TODO: use bad
         errors.push(log)
         word + aux.str-some(var)

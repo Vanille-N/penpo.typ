@@ -83,9 +83,9 @@
   ])
 }
 
-#let pu-ala-pu(nimi, seme, nanpa-ante: none) = {
+#let pu-ala-pu(nimi, nanpa-ante: none) = {
   let meta = nimi-ale.at(nimi, default: none)
-  let tag = "rarity-"+seme+"("+nimi+")"
+  let tag = "rarity("+nimi+")"
   if meta == none {
     (color: red, log: pakala(red, tag, 0, switch[
       "#nimi" li lon ala
