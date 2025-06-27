@@ -13,6 +13,6 @@
 #show-Lasina(words)
 #show-pona(words)
 #show-hangul(words)
-#show-kanji(words)
+#show-hiragana(words)
 
 #penpo.pakala.pini()

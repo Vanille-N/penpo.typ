@@ -20,18 +20,18 @@
   )
 }
 
-#let show-kanji(words) = {
+#let show-hiragana(words) = {
   table(
     stroke: none,
     columns: 1,
-    ..penpo.kanji.sitelen(words)
+    ..penpo.hiragana.sitelen(words)
   )
 }
 
-#let show-hangul(words) = {
+#let show-hangul(words, ..args) = {
   table(
     stroke: none,
     columns: 1,
-    ..penpo.hangul.sitelen(words)
+    ..penpo.hangul.sitelen(words, ..args.named())
   )
 }

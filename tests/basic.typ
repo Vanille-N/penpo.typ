@@ -62,6 +62,6 @@ ona li kiwen li sike lukin ala.
 
 #show-hangul(words)
 
-#show-kanji(words)
+#show-hiragana(words)
 
 #penpo.pakala.pini()

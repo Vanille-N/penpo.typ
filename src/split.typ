@@ -26,7 +26,7 @@
   } else if (chr in "/") {
     "sep"
   } else {
-    "other"
+    panic(chr)
   }
 }
 

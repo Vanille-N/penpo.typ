@@ -5,7 +5,7 @@
 #import "kokosila.typ"
 
 #import "hangul.typ"
-#import "kanji.typ"
+#import "hiragana.typ"
 
 #import "nimisin.typ" as libnimisin
 #import libnimisin: nimisin, nimisin-mute
