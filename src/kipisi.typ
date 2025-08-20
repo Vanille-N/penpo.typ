@@ -1,4 +1,4 @@
-#import "aux.typ"
+#import "extra.typ"
 #import "nimi.typ"
 #import "pakala.typ"
 #import "split.typ"
@@ -43,7 +43,7 @@
       continue
     }
     // Otherwise it's just a string in the options
-    panic("Unimplemented")
+    panic("Unimplemented: cannot segment '" + word + "'")
   }
   sem
 }

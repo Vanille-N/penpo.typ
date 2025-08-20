@@ -1,8 +1,9 @@
 #import "common.typ": *
+#import penpo: *
 
 #penpo.nimisin("Inli", "insa n li ijo", _lili: none)
 #penpo.nimisin("Masi", "mun alasa sinpin ijo", _lili: 1)
-#penpo.nimisin("Newen", "namako en weka en namako", _lili: "namako/2 namako")
+#penpo.nimisin("Newen", "namako en weka en namako", _lili: "namako namako")
 
 #penpo.nimisin-mute(
   _lili: none,
@@ -23,45 +24,54 @@
   Temo: "tawa e mi o",
 )
 
+#let paragraph = [
+  == o lukin e pakala lili
+
+  namako namako/2
+
+  == mun Masi
+
+  #only("la")[toki ni li kepeken e sitelen Lasina]
+  #only("sp")[toki ni li kepeken e sitelen pona]
+
+  suno mi la, mun Masi (toki Inli: "#esc[Mars]") /sp/
+  li mun nanpa tu tu lon weka suno Sola. /sp/
+  ona li lili nanpa tu. mun Masi la mun Mekuliju taso li lili. /sp/
+  ma Tela la, ona li lili. ma pi mun Masi li jo e kiwen mute. /sp/
+  ona li lete li jo e kon lili. /sp/
+  ona li loje lukin la, nimi ante ona li "mun loje". /sp/
+  telo li lon ala ma Masi. taso, kiwen telo lete li lon. /sp/
+  ona li jo e nena ma suli. /sp/
+  nena ma Olinpu Mon li nena ma nanpa wan lon /sp/
+  ma Masi lon kulupu mun suno. /sp/
+  nimi pi mun Masi li sama e jan sewi tan nasin sewi Loma. /sp/
+  jan sewi ni li jan sewi utala. /sp/
+
+  jan li tawa mun Masi ala. taso, ilo mun mute li tawa mun Masi. /sp/
+  ma Mewika en ma Elopa /sp/
+  en ma Losi en ma Nijon /sp/
+  en ma Imalasi en ma Sonko /sp/
+  li tawa e ilo tawa mun Masi. /sp/
+  ilo li awen lon selo. ilo ante li ken tawa lon selo. /sp/
+  ilo Insanjuwisi /sp/
+  (toki Inli: "#esc[Ingenuity]") li ken tawa lon kon. /sp/
+  ilo ante li tawa sike e mun Masi li pali e sitelen pi selo ona. /sp/
+
+  mun lili tu li sike e mun Masi. /sp/
+  nimi ona li mun Popo li mun Temo. /sp/
+  ona li kiwen li sike lukin ala. /sp/
+]
+
 #penpo.pakala.open()
 
-#let words = segment("
-== mun Masi
+#[
+  #show: penpo.sitelen-Lasina
+  #paragraph
+]
 
-suno mi la, mun Masi (toki Inli:", ["Mars"], ")
-~ li mun nanpa tu tu lon weka suno Sola.
-ona li lili nanpa tu. ~~ mun Masi la mun Mekuliju taso li lili.
-ma Tela la, ona li lili. ~~ ma pi mun Masi li jo e kiwen mute.
-ona li lete li jo e kon lili.
-ona li loje lukin la, nimi ante ona li te mun loje to.
-telo li lon ala ma Masi. ~~ taso, kiwen telo lete li lon.
-ona li jo e nena ma suli.
-nena ma Olinpu Mon li nena ma nanpa wan lon
-ma Masi lon kulupu mun suno.
-nimi pi mun Masi li sama e jan sewi tan nasin sewi Loma.
-jan sewi ni li jan sewi utala.
-
-jan li tawa mun Masi ala. ~~ taso, ilo mun mute li tawa mun Masi.
-ma Mewika en ma Elopa
-~ en ma Losi en ma Nijon
-~ en ma Imalasi en ma Sonko
-~ li tawa e ilo tawa mun Masi.
-ilo li awen lon selo. ~~ ilo ante li ken tawa lon selo.
-ilo Insanjuwisi
-~ (toki Inli:", ["Ingenuity"], ") li ken tawa lon kon.
-ilo ante li tawa sike e mun Masi li pali e sitelen pi selo ona.
-
-mun lili tu li sike e mun Masi.
-nimi ona li mun Popo li mun Temo.
-ona li kiwen li sike lukin ala.
-")
-
-#show-Lasina(words)
-
-#show-pona(words)
-
-#show-hangul(words)
-
-#show-hiragana(words)
+#[
+  #show: penpo.sitelen-pona
+  #paragraph
+]
 
 #penpo.pakala.pini()

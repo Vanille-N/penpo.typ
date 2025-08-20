@@ -1,4 +1,4 @@
-#import "common.typ": *
+#import "../src/lib.typ" as penpo
 
 #let vars(..pairs) = {
   for (base, num) in pairs.named() {
@@ -12,7 +12,7 @@
   }
 }
 
-#let words = segment(vars(
+#let words = vars(
   akesi: 2,
   kala: 2,
   ni: 8,
@@ -31,10 +31,21 @@
   kapesi: 2,
   misa: 6,
   taki: 2,
-))
+)
 
 #penpo.pakala.open()
 
-#show-pona(words)
+#show: penpo.sitelen-pona
+#penpo.accept-words("kapesi", "meli", "mije", "namako", "soko", "epiku", "lanpan", "majuna", "linluwi", "misa", "taki")
+
+#words
+
+meli meli/1 meli/2
+
+#penpo.default-sp-variant(meli: 2)
+
+meli meli/1 meli/2
+
+
 
 #penpo.pakala.pini()

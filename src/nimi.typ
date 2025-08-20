@@ -258,3 +258,6 @@
   yupekosi: sin(),
 )
 
+#let default-sp-variant = state("default-sp-variant", (:))
+#let accepted-words = state("accepted-words", ())
+

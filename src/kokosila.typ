@@ -1,10 +1,10 @@
-#import "aux.typ"
+#import "extra.typ"
 
 /// Global variable that determines if the library
 /// should use English (`kokosila = true`) or
 /// toki pona (`kokosila = false`, by default).
 /// -> bool
-#let kokosila = state(aux.localize-label("kokosila", "kokosila"), false)
+#let kokosila = state(extra.localize-label("kokosila", "kokosila"), false)
 
 /// This toggles the value of the variable `kokosila`,
 /// which among other things is queried by `pakala.typ`

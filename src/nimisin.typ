@@ -1,10 +1,10 @@
-#import "aux.typ"
+#import "extra.typ"
 #import "nimi.typ"
 #import "nasin-sitelen.typ"
 #import "pakala.typ"
 #import "kipisi.typ"
 
-#let localize-label(lab) = aux.localize-label("nimisin", lab)
+#let localize-label(lab) = extra.localize-label("nimisin", lab)
 
 #let spellings = state(localize-label("spellings"), (:))
 #let shortenable = state(localize-label("shortenable"), (:))
@@ -61,7 +61,7 @@
       if err != none {
         errors.push(err.log)
       }
-      char + aux.str-some(var)
+      char + extra.str-some(var)
     } else {
       errors.push(pakala.sitelen-ala(char))
       "???"
@@ -90,7 +90,7 @@
         let (color, log) = pakala.pu-ala-pu(base, nanpa-ante: var)
         // TODO: use bad
         errors.push(log)
-        word + aux.str-some(var)
+        word + extra.str-some(var)
       } else {
         errors.push(pakala.sitelen-ala(char))
         "???" // TODO: make it red in the text

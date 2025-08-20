@@ -1,4 +1,4 @@
-#import "aux.typ"
+#import "extra.typ"
 #import "kipisi.typ"
 #import "nimi.typ"
 #import "pakala.typ"
@@ -253,7 +253,7 @@
           } else if word.type == "punct" {
             punct-interp-hangul(word.word).at(1)
           } else if word.type == "content" {
-            [#nasin-sitelen.Lasina[#word.val]]
+            nasin-sitelen.Lasina[#word.val]
           } else {
             panic[#word.type]
           }

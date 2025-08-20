@@ -15,12 +15,12 @@
 //   composed of 100 copies of the exact same error message.
 //   The severity decides the order in which they appear.
 
-#import "aux.typ"
+#import "extra.typ"
 #import "nimi.typ": ale as nimi-ale
 #import "nasin-sitelen.typ"
 #import "kokosila.typ": switch
 
-#let (open-aux, pakala, pini) = aux.make-new-log("pakala")
+#let (open-aux, pakala, pini) = extra.make-new-log("pakala")
 
 /// Start collecting errors. Call this wherever you want the error log
 /// to appear. -> content
@@ -96,18 +96,18 @@
     none
   } else if meta.rarity == "ku" {
     (color: orange, log: pakala(orange, tag, 7, switch[
-      "#nimi" (#nasin-sitelen.seli-kiwen(nimi + aux.str-some(nanpa-ante)))
+      "#nimi" (#nasin-sitelen.seli-kiwen(nimi + extra.str-some(nanpa-ante)))
       li lon pu ala
     ][
-      "#nimi" (#nasin-sitelen.seli-kiwen(nimi + aux.str-some(nanpa-ante)))
+      "#nimi" (#nasin-sitelen.seli-kiwen(nimi + extra.str-some(nanpa-ante)))
       is not in "pu" (rare word)
     ]))
   } else if meta.rarity == "sin" {
     (color: orange, log: pakala(orange, tag, 6, switch[
-      "#nimi" (#nasin-sitelen.seli-kiwen(nimi + aux.str-some(nanpa-ante)))
+      "#nimi" (#nasin-sitelen.seli-kiwen(nimi + extra.str-some(nanpa-ante)))
       li lon ku suli ala
     ][
-      "#nimi" (#nasin-sitelen.seli-kiwen(nimi + aux.str-some(nanpa-ante)))
+      "#nimi" (#nasin-sitelen.seli-kiwen(nimi + extra.str-some(nanpa-ante)))
       is not in "ku suli" (obscure word)
     ]))
   } else {

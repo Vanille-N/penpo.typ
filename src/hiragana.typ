@@ -1,4 +1,4 @@
-#import "aux.typ"
+#import "extra.typ"
 #import "kipisi.typ"
 #import "nimi.typ"
 #import "pakala.typ"
