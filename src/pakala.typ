@@ -4,12 +4,12 @@
 // warnings sorted by severity)
 //
 // Rough usage:
-// - anywhere in the document, invoke `log()`.
+// - anywhere in the document, invoke `open()`.
 //   This is where the log of all warnings will be inserted.
-// - at the end of the document, place `pini`.
-//   This will create a tag that lets `log()` know when all errors have been
+// - at the end of the document, place `pini()`.
+//   This will create a tag that lets `open()` know when all errors have been
 //   received.
-// - in functions, invoke `alert` to add all problems to the log.
+// - in functions, invoke `pakala` to add all problems to the log.
 //   Warnings are identified by a tag and a severity.
 //   The tag determines when two warnings are identical, so that the log is not
 //   composed of 100 copies of the exact same error message.
@@ -20,7 +20,7 @@
 #import "nasin-sitelen.typ"
 #import "kokosila.typ": switch
 
-#let (open-aux, pakala, pini) = extra.make-new-log("pakala")
+#let (open-aux, pakala, pini) = extra.make-new-log(extra.localize-label("pakala", "pakala"))
 
 /// Start collecting errors. Call this wherever you want the error log
 /// to appear. -> content

@@ -1,5 +1,4 @@
-#import "common.typ": *
-#import penpo: *
+#import "../src/lib.typ" as penpo
 
 #penpo.nimisin("Inli", "insa n li ijo", _lili: none)
 #penpo.nimisin("Masi", "mun alasa sinpin ijo", _lili: 1)
@@ -31,10 +30,10 @@
 
   == mun Masi
 
-  #only("la")[toki ni li kepeken e sitelen Lasina]
-  #only("sp")[toki ni li kepeken e sitelen pona]
+  #penpo.only("la")[toki ni li kepeken e sitelen Lasina]
+  #penpo.only("sp")[toki ni li kepeken e sitelen pona]
 
-  suno mi la, mun Masi (toki Inli: "#esc[Mars]") /sp/
+  suno mi la, mun Masi (toki Inli: "#penpo.esc[Mars]") /sp/
   li mun nanpa tu tu lon weka suno Sola. /sp/
   ona li lili nanpa tu. mun Masi la mun Mekuliju taso li lili. /sp/
   ma Tela la, ona li lili. ma pi mun Masi li jo e kiwen mute. /sp/
@@ -54,7 +53,7 @@
   li tawa e ilo tawa mun Masi. /sp/
   ilo li awen lon selo. ilo ante li ken tawa lon selo. /sp/
   ilo Insanjuwisi /sp/
-  (toki Inli: "#esc[Ingenuity]") li ken tawa lon kon. /sp/
+  (toki Inli: "#penpo.esc[Ingenuity]") li ken tawa lon kon. /sp/
   ilo ante li tawa sike e mun Masi li pali e sitelen pi selo ona. /sp/
 
   mun lili tu li sike e mun Masi. /sp/
@@ -65,12 +64,12 @@
 #penpo.pakala.open()
 
 #[
-  #show: penpo.sitelen-Lasina
+  #show: penpo.lasina.sitelen
   #paragraph
 ]
 
 #[
-  #show: penpo.sitelen-pona
+  #show: penpo.pona.sitelen
   #paragraph
 ]
 

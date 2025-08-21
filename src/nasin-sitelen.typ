@@ -4,7 +4,6 @@
 
 #let seli-kiwen(t) = {
   text(font: "sitelen seli kiwen asuki", hyphenate: false)[#t]
-  //text[#t]
 }
 
 #let Nimi(spelling) = {

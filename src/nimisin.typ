@@ -10,7 +10,6 @@
 #let shortenable = state(localize-label("shortenable"), (:))
 #let initials = state(localize-label("initials"), (:))
 
-// TODO: allow configuring when this is called
 #let nimisin-lili-forget() = {
   shortenable.update(_ => (:))
   initials.update(_ => (:))

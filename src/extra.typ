@@ -1,13 +1,5 @@
 /// Auxiliary functions, not directly related to toki pona.
 
-/// Conditional bold formatting. -> content
-#let bold-if(
-  /// Whether the next parameter should be shown in bold. -> bool
-  bold,
-  /// Anything that can be turned into content. -> content | string | any
-  t,
-) = if bold [*#t*] else [ #t ]
-
 /// Bypass the fact that `none` is not `str`-able, by turning `none` into `""`.
 /// -> str
 #let str-some(
@@ -46,7 +38,6 @@
   lab
 ) = {
   let log = state(lab, (:))
-  let lab = localize-label("aux", lab)
   // Label that marks the end of the collection of errors
   let end() = [#[]#label(lab)]
   // Print logging
@@ -75,18 +66,3 @@
   (begin, push, end)
 }
 
-// TODO: doc
-#let autospace(left, right) = {
-  let nb = if left == none or right == none {
-    none
-  } else {
-    calc.max(left, right)
-  }
-  if nb == none or nb == 0 {
-    []
-  } else if nb == 1 {
-    [ ]
-  } else {
-    [  ]
-  }
-}

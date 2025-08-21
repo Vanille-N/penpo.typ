@@ -17,11 +17,6 @@
 //          = "sin"  -> obscure word, usage will result in a severe warning
 // - maxvar          -> how many variants to the hieroglyph are there
 //
-// Punctuation
-// - group = "close" -> space goes after this symbol
-//         = "open"  -> space goes before this symbol
-// - word            -> how this punctuation is rendered in latin font
-// - symb            -> how this punctuation is rendered in hieroglyphs
 
 // This word is in the base vocabulary.
 #let pu(var: none) = (
@@ -42,37 +37,6 @@
   group: "word",
   rarity: "sin",
   maxvar: var,
-)
-
-// This is a punctuation symbol.
-#let punct(word, group: "close") = (
-  word: word,
-  group: group,
-)
-
-// Set of punctuation markers.
-// This is kind of a fit-all category of markup symbols that are trivial to render
-// but aren't rendered identically in latin or sitelen pona.
-// This is why "~" and "~~" which aren't *really* punctuation are here
-// (because they're trivial) but "=" and "==" are hardcoded elsewhere
-// (because those are much less easy to handle).
-#let punctuation = (
-  te: punct("te", group: "open"),
-  to: punct("to"),
-  ".": punct("."),
-  ":": punct(":"),
-  "!": punct("!"),
-  ",": punct(","),
-  "?": punct("?"),
-  "(": punct("(", group: "open"),
-  ")": punct(")"),
-  "~": punct("~"),
-  "~~": punct("~~"),
-  "~~~": punct("~~~"),
-  "-": punct("-"),
-  "--": punct("--"),
-  "---": punct("---"),
-  "\\": punct("\\"),
 )
 
 /// Record of all existing words.
@@ -257,7 +221,4 @@
   wuwojiti: sin(),
   yupekosi: sin(),
 )
-
-#let default-sp-variant = state("default-sp-variant", (:))
-#let accepted-words = state("accepted-words", ())
 
