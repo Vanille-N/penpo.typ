@@ -5,7 +5,7 @@
 #import "nimisin.typ": nimisin, nimisin-mute
 
 #import "dyn.typ"
-#import dyn: update-one-punct
+#import dyn: o-ante-e-sitelen-lili, o-oke-e-nimi
 
 #let esc(ct) = context {
   let old-mode = dyn.mode.get()

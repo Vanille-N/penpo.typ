@@ -1,17 +1,26 @@
 #import "nasin-sitelen.typ"
 #import "extra.typ"
 
-#import "pakala.typ"
-#import "nimi.typ"
-
-#import "nimisin.typ" as libnimisin
-#import libnimisin: nimisin, nimisin-mute
-
-#import "kipisi.typ"
-
 #let accept = state(extra.localize-label("dyn", "accept"), ())
 
 #let mode = state(extra.localize-label("dyn", "mode"), none)
+
+/// Global variable that determines if the library
+/// should use English (`kokosila = true`) or
+/// toki pona (`kokosila = false`, by default).
+/// -> bool
+#let kokosila = state(extra.localize-label("dyn", "kokosila"), false)
+
+/// Choose based on the value of the variable.
+/// -> any
+#let kokosila-switch(
+  /// Return this if `kokosila = false` -> any
+  tp,
+  /// Return this if `kokosila = true` -> any
+  en,
+) = context {
+  if kokosila.get() { en } else { tp }
+}
 
 #let punct = state(extra.localize-label("dyn", "punct"), (
   "_": (
@@ -54,16 +63,19 @@
   }
 }
 
-#let update-one-punct(label, sym, new) = {
+#let o-ante-e-sitelen-lili(label, upd) = {
   punct.update(punct => {
-    punct.at(label).at(sym) = new
+    for (sym, new) in upd {
+      punct.at(label).at(sym) = new
+    }
     punct
   })
 }
 
 // TODO: this does not yet affect spelling
-#let accept-words(..words) = {
-  nimi.accept.update(ok => {
+#let o-oke-e-nimi(..words) = {
+  import "nimi.typ"
+  accept.update(ok => {
     for word in words.pos() {
       if word not in nimi.ale { panic("Word does not exist") }
       ok.push(word)

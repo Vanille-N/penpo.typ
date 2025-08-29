@@ -18,46 +18,46 @@
 #import "extra.typ"
 #import "nimi.typ": ale as nimi-ale
 #import "nasin-sitelen.typ"
-#import "kokosila.typ": switch
+#import "dyn.typ": kokosila-switch
 
 #let (open-aux, pakala, pini) = extra.make-new-log(extra.localize-label("pakala", "pakala"))
 
 /// Start collecting errors. Call this wherever you want the error log
 /// to appear. -> content
-#let open() = open-aux(switch[lipu ni li jo e pakala lili:][The following typos have been detected:])
+#let open() = open-aux(kokosila-switch[lipu ni li jo e pakala lili:][The following typos have been detected:])
 
 /// Letter is lowercase but should be uppercase.
 #let lili-ike(lili, nimi) = {
   let tag = "lowercase("+nimi+")"
-  pakala(red, tag, 4, switch[
+  pakala(red, tag, 4, kokosila-switch[
     "#lili" lon "#nimi" li lili ike
   ]["#lili" in the name "#nimi" should be uppercase])
 }
 
 #let suli-ike(lili, nimi) = {
   let tag = "uppercase("+lili+","+nimi+")"
-  pakala(red, tag, 5, switch[
+  pakala(red, tag, 5, kokosila-switch[
     "#lili" lon "#nimi" li suli ike
   ]["#lili" in the name "#nimi" should be lowercase])
 }
 
 #let nanpa-ante(nimi, lili-mute) = {
   let tag = "len("+nimi+")"
-  pakala(red, tag, 2, switch[
+  pakala(red, tag, 2, kokosila-switch[
     "#nimi" li ante nanpa sitelen tawa "#nasin-sitelen.Nimi(lili-mute)"
   ]["#nimi" should have the same length as its spelling "#nasin-sitelen.Nimi(lili-mute)"])
 }
 
 #let sitelen-ala(nimi) = {
   let tag = "sitelen("+nimi+")"
-  pakala(red, tag, 1, switch[
+  pakala(red, tag, 1, kokosila-switch[
     "#nimi" li lon ala nasin sitelen pona
   ]["#nimi" does not have a known hieroglyph])
 }
 
 #let sitelen-ante(lili, sitelen, nimi, lili-mute) = {
   let tag = "spelling("+lili+","+sitelen+","+nimi+")"
-  pakala(red, tag, 0, switch[
+  pakala(red, tag, 0, kokosila-switch[
     "#sitelen" (#nasin-sitelen.seli-kiwen[#sitelen])
     lon "#nasin-sitelen.Nimi(lili-mute)"
     li ante tawa "#lili" lon "#nimi"
@@ -72,7 +72,7 @@
   let (nimi1, lili-mute1) = ni1
   let (nimi2, lili-mute2) = ni2
   let tag = "initial("+nimi1+","+nimi2+")"
-  pakala(red, tag, 3, switch[
+  pakala(red, tag, 3, kokosila-switch[
     #nimi1 (#nasin-sitelen.Nimi(lili-mute1))
     en #nimi2 (#nasin-sitelen.Nimi(lili-mute2))
     li sama sitelen wan "#nasin-sitelen.seli-kiwen(lili)"
@@ -87,7 +87,7 @@
   let meta = nimi-ale.at(nimi, default: none)
   let tag = "rarity("+nimi+")"
   if meta == none {
-    (color: red, log: pakala(red, tag, 0, switch[
+    (color: red, log: pakala(red, tag, 0, kokosila-switch[
       "#nimi" li lon ala
     ]["#nimi" is not a known word]))
   } else if meta.group != "word" {
@@ -95,7 +95,7 @@
   } else if meta.rarity == "pu" {
     none
   } else if meta.rarity == "ku" {
-    (color: orange, log: pakala(orange, tag, 7, switch[
+    (color: orange, log: pakala(orange, tag, 7, kokosila-switch[
       "#nimi" (#nasin-sitelen.seli-kiwen(nimi + extra.str-some(nanpa-ante)))
       li lon pu ala
     ][
@@ -103,7 +103,7 @@
       is not in "pu" (rare word)
     ]))
   } else if meta.rarity == "sin" {
-    (color: orange, log: pakala(orange, tag, 6, switch[
+    (color: orange, log: pakala(orange, tag, 6, kokosila-switch[
       "#nimi" (#nasin-sitelen.seli-kiwen(nimi + extra.str-some(nanpa-ante)))
       li lon ku suli ala
     ][

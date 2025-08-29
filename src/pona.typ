@@ -10,12 +10,12 @@
 
 #let default = state(extra.localize-label("sp", "default"), (:))
 
-#let set-default(..subst) = context {
+#let nanpa-ala-li-nanpa(..subst) = context {
   default.update(default => {
     for (base, var) in subst.named() {
       if base not in nimi.ale { panic("Not a known word") }
       if nimi.ale.at(base).maxvar == none { panic("This word has no variants") }
-      if var >= nimi.ale.at(base).maxvar { panic("Default variant too big") }
+      if var > nimi.ale.at(base).maxvar { panic("Default variant too big") }
       default.insert(base, var)
     }
     default
@@ -26,8 +26,8 @@
 #let sitelen(ct) = context {
   let old-mode = dyn.mode.get()
   dyn.mode.update("sp")
-  show regex("/../"): none
-  show "/sp/": linebreak()
+  show regex(" */../ *"): " "
+  show regex(" */sp/ *"): linebreak()
   show "\"": dyn.fetch-punct("sp", "\"")
   show ",": dyn.fetch-punct("sp", ",")
   show ".": dyn.fetch-punct("sp", ".")
@@ -39,7 +39,7 @@
   show ")": dyn.fetch-punct("sp", ")")
   show regex("\w+(/\d+)?"): word => context {
     if dyn.mode.get() == "sp" {
-      let (base, var) = kipisi.of-word(word.text)
+      let (base, var) = kipisi.kipisi(word.text)
       if var == none {
         var = default.get().at(base, default: none)
       }
@@ -56,7 +56,7 @@
       } else if base in nimisin.spellings.get() {
         let data = nimisin.spellings.get().at(base)
         let shorten = base in nimisin.shortenable.get()
-        let spelling = if shorten { data.short } else { data.full }
+        let spelling = if shorten and data.short != none { data.short } else { data.full }
         [#nasin-sitelen.Nimi(spelling)]
         if not shorten {
           nimisin.nimisin-kama-lili(base, data.short, spelling)

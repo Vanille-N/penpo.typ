@@ -54,7 +54,7 @@
   }
   let chars = ()
   for char in letters {
-    let (base, var) = kipisi.of-word(char)
+    let (base, var) = kipisi.kipisi(char)
     let word = if base in nimi.ale {
       let err = pakala.pu-ala-pu(base, nanpa-ante: var)
       if err != none {
@@ -65,7 +65,7 @@
       errors.push(pakala.sitelen-ala(char))
       "???"
     }
-    chars.push(word)
+    chars.push(base + extra.str-some(var))
   }
   for (letter, hieroglyph) in word.clusters().zip(chars) {
     if hieroglyph.at(0) != "?" and lower(letter) != hieroglyph.at(0) {
@@ -84,17 +84,19 @@
   } else if type(_lili) == str {
     let short = ()
     for char in _lili.split(" ") {
-      let (base, var) = kipisi.of-word(char)
+      let (base, var) = kipisi.kipisi(char)
       let word = if base in nimi.ale {
-        let (color, log) = pakala.pu-ala-pu(base, nanpa-ante: var)
+        let err = pakala.pu-ala-pu(base, nanpa-ante: var)
         // TODO: use bad
-        errors.push(log)
+        if err != none {
+          errors.push(err.log)
+        }
         word + extra.str-some(var)
       } else {
         errors.push(pakala.sitelen-ala(char))
         "???" // TODO: make it red in the text
       }
-      short.push(word)
+      short.push(base + extra.str-some(var))
     }
     short
   } else {
@@ -103,6 +105,18 @@
   spellings.update(nimi => {
     nimi.insert(word, (full: chars, short: short))
     nimi
+  })
+  shortenable.update(short => {
+    if word in short {
+      let _ = short.remove(word)
+    }
+    short
+  })
+  initials.update(init => {
+    if word in init {
+      let _ = init.remove(word)
+    }
+    init
   })
 }
 

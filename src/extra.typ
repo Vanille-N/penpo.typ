@@ -41,13 +41,16 @@
   // Label that marks the end of the collection of errors
   let end() = [#[]#label(lab)]
   // Print logging
-  let begin(title) = context {
-    let errors = log.at(label(lab)).values().sorted(key: k => k.at(0))
-    if errors != () {
-      text(fill: red)[*#title*]
-      for (_, _, count, msg) in errors [
-        - #msg #text(fill: gray.darken(20%))[($times #count$)] \
-      ]
+  let begin(title) = {
+    log.update(_ => (:))
+    context {
+      let errors = log.at(label(lab)).values().sorted(key: k => k.at(0))
+      if errors != () {
+        text(fill: red)[*#title*]
+        for (_, _, count, msg) in errors [
+          - #msg #text(fill: gray.darken(20%))[($times #count$)] \
+        ]
+      }
     }
   }
   // Add a new entry in the log

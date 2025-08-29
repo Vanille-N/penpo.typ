@@ -1,2 +1,2 @@
-watch:
-  typst watch --root=.. --font-path=../fonts docs.typ docs.pdf
+doc:
+  typst watch --root=.. --font-path=../sama-ni/fonts main.typ main.pdf

@@ -2,7 +2,7 @@
 
 /// Split the word and validate the variant number.
 /// -> dict
-#let of-word(
+#let kipisi(
   /// Word to split in the format `"word/n"` for the `n`'th variant of `"word"`
   /// -> str
   word

@@ -12,8 +12,8 @@
 #let sitelen(ct) = context {
   let old-mode = dyn.mode.get()
   dyn.mode.update("la")
-  show regex("/../"): none
-  show "/la/": linebreak()
+  show regex(" */../ *"): " "
+  show regex(" */la/ *"): linebreak()
   show "\"": dyn.fetch-punct("la", "\"")
   show ",": dyn.fetch-punct("la", ",")
   show ".": dyn.fetch-punct("la", ".")
@@ -25,7 +25,7 @@
   show ")": dyn.fetch-punct("la", ")")
   show regex("\w+(/\d+)?"): word => context {
     if dyn.mode.get() == "la" {
-      let (base,) = kipisi.of-word(word.text)
+      let (base,) = kipisi.kipisi(word.text)
       if base in nimi.ale {
         let err = if base in dyn.accept.get() { none } else { pakala.pu-ala-pu(base)}
         if err != none {

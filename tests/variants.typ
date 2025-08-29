@@ -35,17 +35,34 @@
 
 #penpo.pakala.open()
 
-#show: penpo.sitelen-pona
-#penpo.accept-words("kapesi", "meli", "mije", "namako", "soko", "epiku", "lanpan", "majuna", "linluwi", "misa", "taki")
+#show: penpo.pona.sitelen
+#penpo.o-oke-e-nimi("kapesi", "meli", "mije", "namako", "soko", "epiku", "lanpan", "majuna", "linluwi", "misa", "taki")
 
 #words
 
 meli meli/1 meli/2
 
-#penpo.default-sp-variant(meli: 2)
+#penpo.pona.nanpa-ala-li-nanpa(meli: 2)
 
 meli meli/1 meli/2
 
 
+mije mije/1 mije/2
+
+
+#penpo.nimisin-mute(
+  _lili: none,
+  Masi: "mije ala suno insa",
+  Mami: "mije/1 ala mute insa",
+  Majo: "mije/2 ala jo owe",
+)
+
+Masi Mami Majo
+
+#penpo.pona.nanpa-ala-li-nanpa(mije: 2)
+
+Masi Mami Majo
+
 
 #penpo.pakala.pini()
+
