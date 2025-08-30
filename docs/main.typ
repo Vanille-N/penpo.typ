@@ -30,7 +30,7 @@ writing systems.
 
 #align(bottom)[
   #line(length: 100%)
-  #outline()
+  #outline(depth: 2)
 ]
 
 #pagebreak()
@@ -209,11 +209,11 @@ in only one of the writing systems.
 
 penpo additionally provides spellchecking and rarity warnings.
 You can disable them with the function `o-oke-e-nimi`,
-or display a structured error log with `pakala.open` and `pakala.pini`.
+or display a structured error log with `pakala.open`.
 
 #table(columns: (55%, 45%), stroke: 0.1pt)[
   ```typ
-  // Put this at the beginning of your document
+  // Put this wherever you want the log.
   #penpo.pakala.open()
 
   #show: penpo.lasina.sitelen
@@ -222,12 +222,11 @@ or display a structured error log with `pakala.open` and `pakala.pini`.
   kamala jonke li mu tan waso utala.
   #penpo.o-oke-e-nimi("jonke")
   kamala jonke li mu tan waso utala.
-
-  // Put this at the very end of your document
-  #penpo.pakala.pini()
   ```
 ][
-  #penpo.pakala.open()
+  *#text(fill: red)[lipu ni li jo e pakala lili:]*
+  - #text(fill: red)["kamala" li lon ala] #text(fill: gray.darken(30%))[($times 2$)]
+  - #text(fill: orange)["jonke" (#penpo.pona.sitelen[jonke]) li lon ku suli ala] #text(fill: gray.darken(30%))[$times 1$]
 
   #show: penpo.lasina.sitelen
 
@@ -235,8 +234,6 @@ or display a structured error log with `pakala.open` and `pakala.pini`.
 
   #penpo.o-oke-e-nimi("jonke")
   kamala jonke li mu tan waso utala.
-
-  #penpo.pakala.pini()
 ]
 
 = kokosila
@@ -250,15 +247,17 @@ You can turn the language of error messages to english using
 ```
 
 The following functions have an alias:
-#table(columns: 2,
-  `o-ante-e-sitelen-lili`, `kokosila.update-punct`,
-  `o-oke-e-nimi`, `kokosila.allow-words`,
-  `nimisin`, `kokosila.spelling`,
-  `nimisin-mute`, `kokosila.spellings`,
-  `pakala.open`, `kokosila.begin-log`,
-  `pakala.pini`, `kokosila.end-log`,
-  `pona.nanpa-ala-li-nanpa`, `kokosila.default-sp-variant`,
-)
+#align(center)[
+  #table(columns: 2, align: left,
+    `o-ante-e-sitelen-lili`, `kokosila.update-punct`,
+    `o-oke-e-nimi`, `kokosila.allow-words`,
+    `nimisin`, `kokosila.spelling`,
+    `nimisin-mute`, `kokosila.spellings`,
+    `pakala.open`, `kokosila.begin-log`,
+    `pakala.pini`, `kokosila.end-log`,
+    `pona.nanpa-ala-li-nanpa`, `kokosila.default-sp-variant`,
+  )
+]
 
 = Advanced options
 
@@ -321,10 +320,8 @@ with `/n` the number of the variant.
   #show: penpo.pona.sitelen
 
   olin olin/0 olin/1 olin/2
-
   #penpo.pona.nanpa-ala-li-nanpa(olin: 1)
   olin olin/0 olin/1 olin/2
-
   #penpo.pona.nanpa-ala-li-nanpa(olin: 2)
   olin olin/0 olin/1 olin/2
   ```
@@ -343,8 +340,6 @@ with `/n` the number of the variant.
 Be aware that this feature is currently very closely tied to sitelen seli kiwen,
 and there is no uniform convention. Sometimes `/0` is synonymous for `/1`
 (e.g. `meli`) and sometimes not (e.g. `olin`).
-
-#pagebreak()
 
 == Punctuation
 
@@ -423,10 +418,12 @@ is supported, but in the future there are plans to customize the font.
 
 = Renderers
 
-// TODO
+Below are the writing systems available for display.
+Each has their own code, for which we internally hijack the `lang` field
+of `text`.
 
-//#document("lasina", "Latin alphabet")
-//#document("pona", "sitelen pona")
+#document("lasina", "sitelen Lasina (Latin alphabet)")
+#document("pona", "sitelen pona (hieroglyphs)")
 //#document("hangul", "Hangul alphabet")
 //#document("hiragana", "Hiragana alphabet")
 
@@ -434,12 +431,12 @@ is supported, but in the future there are plans to customize the font.
 
 // TODO
 
-//#document("dyn", "Dynamic state")
-//#document("extra", "Auxiliary functions")
-//#document("kipisi", "")
-//#document("lib", "")
-//#document("nasin-sitelen", "")
-//#document("nimi", "")
-//#document("nimisin", "")
-//#document("pakala", "")
+#document("dyn", "Dynamic state")
+#document("extra", "Auxiliary functions")
+#document("kipisi", "")
+#document("lib", "")
+#document("nasin-sitelen", "")
+#document("nimi", "")
+#document("nimisin", "")
+#document("pakala", "")
 

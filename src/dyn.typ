@@ -3,15 +3,7 @@
 
 #let accept = state(extra.localize-label("dyn", "accept"), ())
 
-#let mode = state(extra.localize-label("dyn", "mode"), none)
-
-/// Global variable that determines if the library
-/// should use English (`kokosila = true`) or
-/// toki pona (`kokosila = false`, by default).
-/// -> bool
-#let kokosila = state(extra.localize-label("dyn", "kokosila"), false)
-
-/// Choose based on the value of the variable.
+/// Choose based on the value of the variable `kokosila`.
 /// -> any
 #let kokosila-switch(
   /// Return this if `kokosila = false` -> any
@@ -56,11 +48,7 @@
 ))
 
 #let fetch-punct(label, sym) = context {
-  if mode.get() == label {
-    punct.get().at(label).at(sym)
-  } else {
-    punct.get().at("_").at(sym)
-  }
+  punct.get().at(label).at(sym)
 }
 
 #let o-ante-e-sitelen-lili(label, upd) = {

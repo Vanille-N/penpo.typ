@@ -73,4 +73,3 @@
   #paragraph
 ]
 
-#penpo.pakala.pini()

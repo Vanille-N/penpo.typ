@@ -22,23 +22,35 @@
   })
 }
 
-// Mode code: "sp"
+/// Mode code: `"sp"`.
+///
+/// The resulting content has `lang: "tok"`,
+/// and internally `lang: "tsp"` is used temporarily.
+///
+/// This function
+/// - converts `/sp/` to linebreak
+/// - erases all other `/../`
+/// - converts punctuation to the current value of
+///   `o-ante-e-sitelen-lili("sp", ...)`
+/// - spellchecks words
+/// - applies the default variant marker if set
+/// - converts to the font "sitelen seli kiwen"
+/// - applies name shortenings if defined
 #let sitelen(ct) = context {
-  let old-mode = dyn.mode.get()
-  dyn.mode.update("sp")
-  show regex(" */../ *"): " "
-  show regex(" */sp/ *"): linebreak()
-  show "\"": dyn.fetch-punct("sp", "\"")
-  show ",": dyn.fetch-punct("sp", ",")
-  show ".": dyn.fetch-punct("sp", ".")
-  show ":": dyn.fetch-punct("sp", ":")
-  // " This line fixes the syntax highlighting on vim
-  show "?": dyn.fetch-punct("sp", "?")
-  show "!": dyn.fetch-punct("sp", "!")
-  show "(": dyn.fetch-punct("sp", "(")
-  show ")": dyn.fetch-punct("sp", ")")
-  show regex("\w+(/\d+)?"): word => context {
-    if dyn.mode.get() == "sp" {
+  show text.where(lang: "tsp"): tt => {
+    set text(lang: "tok")
+    show regex(" */../ *"): none
+    show regex(" */sp/ *"): linebreak()
+    show "\"": dyn.fetch-punct("sp", "\"")
+    show ",": dyn.fetch-punct("sp", ",")
+    show ".": dyn.fetch-punct("sp", ".")
+    show ":": dyn.fetch-punct("sp", ":")
+    // " This line fixes the syntax highlighting on vim
+    show "?": dyn.fetch-punct("sp", "?")
+    show "!": dyn.fetch-punct("sp", "!")
+    show "(": dyn.fetch-punct("sp", "(")
+    show ")": dyn.fetch-punct("sp", ")")
+    show regex("\w+(/\d+)?"): word => context {
       let (base, var) = kipisi.kipisi(word.text)
       if var == none {
         var = default.get().at(base, default: none)
@@ -52,7 +64,7 @@
           [#base#var]
         }
       } else if base in ("te", "to") {
-        base
+        [#base]
       } else if base in nimisin.spellings.get() {
         let data = nimisin.spellings.get().at(base)
         let shorten = base in nimisin.shortenable.get()
@@ -68,11 +80,9 @@
           #{sym.angle.l}#{base}#{sym.angle.r}
         ])]
       }
-    } else {
-      nasin-sitelen.Lasina[#word]
     }
+    tt
   }
-  nasin-sitelen.seli-kiwen[#ct]
-  dyn.mode.update(old-mode)
+  text(lang: "tsp")[#nasin-sitelen.seli-kiwen[#ct]]
 }
 
