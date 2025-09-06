@@ -3,17 +3,6 @@
 
 #let accept = state(extra.localize-label("dyn", "accept"), ())
 
-/// Choose based on the value of the variable `kokosila`.
-/// -> any
-#let kokosila-switch(
-  /// Return this if `kokosila = false` -> any
-  tp,
-  /// Return this if `kokosila = true` -> any
-  en,
-) = context {
-  if kokosila.get() { en } else { tp }
-}
-
 #let punct = state(extra.localize-label("dyn", "punct"), (
   "_": (
     ".": [.],

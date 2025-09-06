@@ -3,6 +3,7 @@
 #import "nasin-sitelen.typ"
 #import "pakala.typ"
 #import "kipisi.typ"
+#import "dyn.typ"
 
 #let localize-label(lab) = extra.localize-label("nimisin", lab)
 
@@ -37,7 +38,7 @@
   }
 }
 
-#let nimisin(word, letters, _lili: auto) = {
+#let nimisin(word, letters, _lili: auto) = context {
   let errors = ()
   let letters = letters.split(" ").filter(w => w != "")
   if word.len() != letters.len() {
@@ -56,7 +57,7 @@
   for char in letters {
     let (base, var) = kipisi.kipisi(char)
     let word = if base in nimi.ale {
-      let err = pakala.pu-ala-pu(base, nanpa-ante: var)
+      let err = if base in dyn.accept.get() { none } else { pakala.pu-ala-pu(base, nanpa-ante: var) }
       if err != none {
         errors.push(err.log)
       }
@@ -86,7 +87,7 @@
     for char in _lili.split(" ") {
       let (base, var) = kipisi.kipisi(char)
       let word = if base in nimi.ale {
-        let err = pakala.pu-ala-pu(base, nanpa-ante: var)
+        let err = if base in dyn.accept.get() { none } else { pakala.pu-ala-pu(base, nanpa-ante: var) }
         // TODO: use bad
         if err != none {
           errors.push(err.log)

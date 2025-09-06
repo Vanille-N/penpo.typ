@@ -18,7 +18,6 @@
 #import "extra.typ"
 #import "nimi.typ": ale as nimi-ale
 #import "nasin-sitelen.typ"
-#import "dyn.typ": kokosila-switch
 
 #let (open-aux, pakala) = extra.make-new-log(extra.localize-label("pakala", "pakala"))
 

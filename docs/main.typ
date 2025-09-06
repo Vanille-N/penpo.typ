@@ -8,13 +8,13 @@
   #text(size: 90pt)[#penpo.pona.sitelen[penpo]] \
   #text(size: 30pt)[*penpo*] \
 
-  #text(size: 25pt)[lawa tawa sitelen kepeken toki pona taso]
+  #text(size: 25pt)[o sitelen kepeken toki pona taso]
 ]
 
 penpo is a spellchecker and transliteration engine for toki pona,
 helping typeset text in sitelen Lasina, sitelen pona, and more.
 It offers many configuration options, and modularity to enable additional
-writing systems.
+writing systems in the future.
 
 #[
   #show: pp => [
@@ -25,7 +25,7 @@ writing systems.
   #penpo.nimisin-mute(Lasina: "linja ale sona ilo nasin alasa")
   ilo penpo li ilo lipu, li ken sitelen e toki pona kepeken sitelen Lasina
   en sitelen pona en sitelen ante mute.
-  sina ken ante e sitelen lili kepeken wawa lili.
+  tenpo ni en tenpo kama la sina ken ante e sitelen lili kepeken wawa lili.
 ]
 
 #align(bottom)[
@@ -56,7 +56,7 @@ The SVG files can be found in `logo/`.
   columns: (1fr, 1fr),
   align: center,
   stroke: none,
-  rect(fill: white, inset: 2mm)[#image("../logo/penpo.svg")],
+  rect(fill: white, inset: 2mm)[#image("../logo/penpo-light.svg")],
   rect(fill: black, inset: 2mm)[#image("../logo/penpo-dark.svg")],
 )
 

@@ -1,29 +1,20 @@
 #import "../src/lib.typ" as penpo
 
-#penpo.nimisin("Newen")("namako en weka en namako")
-
-#let render(txt) = {
-  let words = penpo.nimi-kipisi(txt)
-  table(
-    stroke: none,
-    columns: (1fr, 1fr),
-    ..penpo.sitelen-Lasina(words).zip(penpo.sitelen-pona(words)).flatten()
-  )
-}
-
 #penpo.pakala.open()
+#penpo.o-oke-e-nimi("penpo", "namako")
 
-#render("
+#penpo.nimisin("Newen", "namako en weka en namako", _lili: "namako namako")
+
+#show par: pp => [
+  #table(columns: (1fr, 1fr), stroke: none,
+    penpo.lasina.sitelen[#pp],
+    penpo.pona.sitelen[#pp],
+  )
+]
+
 toki a!
 mi jan Newen.
 
-penpo
-")
+mi pali e lipu ni tan ni: /sp/
+mi wile pana e sona pi kepeken penpo tawa jan mute.
 
-// I want this possible eventually:
-// toki", (red, "li jo"), "e kule mani."
-// applies the style 'red' to only the text 'li jo',
-// with what "applies the style" means determined dynamically.
-
-
-#penpo.pakala.pini()

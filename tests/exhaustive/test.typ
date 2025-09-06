@@ -1,4 +1,4 @@
-#import "../src/lib.typ" as penpo
+#import "/src/lib.typ" as penpo
 
 // TODO: Hangul and Kanji: still transliterate
 // even if not a known word, as long as it's a valid
@@ -42,8 +42,8 @@ te to
 ]
 
 #[
-  #penpo.update-one-punct("la", ".", [ #sym.dot ])
-  #penpo.update-one-punct("la", "\"", smartquote(quotes: ("⟨", "⟩")))
+  #penpo.o-ante-e-sitelen-lili("la", (".": [ #sym.dot ]))
+  #penpo.o-ante-e-sitelen-lili("la", ("\"": smartquote(quotes: ("⟨", "⟩"))))
   #show: penpo.lasina.sitelen
   #paragraph
 ]
@@ -53,4 +53,3 @@ te to
   #paragraph
 ]
 
-#penpo.pakala.pini()

@@ -10,5 +10,5 @@ license = "MIT"
 repository = "https://github.com/Vanille-N/penpo.typ"
 keywords = ["toki", "pona", "sitelen", "lipu", "ilo", "conlang"]
 categories = ["text"]
-exclude = ["*.pdf"]
+exclude = []
 

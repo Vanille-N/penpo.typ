@@ -1,4 +1,4 @@
-#import "../src/lib.typ" as penpo
+#import "/src/lib.typ" as penpo
 
 #let vars(..pairs) = {
   for (base, num) in pairs.named() {
@@ -62,7 +62,4 @@ Masi Mami Majo
 #penpo.pona.nanpa-ala-li-nanpa(mije: 2)
 
 Masi Mami Majo
-
-
-#penpo.pakala.pini()
 

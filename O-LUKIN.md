@@ -1,6 +1,15 @@
 # nasin lipu penpo
 
+[![en](https://img.shields.io/badge/lang-en-red.svg)](README.md)
+
 o pona e lipu sina a!
+
+o lukin e [lipu pi pana sona (toki Inli)](docs/main.pdf).
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="logo/penpo-dark.svg">
+  <img alt="penpo" src="logo/penpo-light.svg">
+</picture>
 
 ---
 
@@ -26,7 +35,9 @@ lipu mute lon "sama-ni/" kin.
 
 ## wile tan nasin penpo
 
-- sina wile jo e ilo "Typst".
-- sina wile jo e nasin sitelen sama "sitelen seli kiwen".
-  ona li ken sitelen pona. o pana e lipu ".ttf" lon lipu sina.
+- sina wile jo e ilo ["Typst"](https://typst.app).
+- sina wile jo e nasin sitelen
+  ["sitelen seli kiwen"](https://www.kreativekorp.com/software/fonts/sitelenselikiwen/).
+  ona li ken sitelen pona.
+  o pana e lipu ".ttf" lon poka pi lipu sina.
 

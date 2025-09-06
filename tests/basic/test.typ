@@ -1,4 +1,4 @@
-#import "../src/lib.typ" as penpo
+#import "/src/lib.typ" as penpo
 
 #penpo.nimisin("Inli", "insa n li ijo", _lili: none)
 #penpo.nimisin("Masi", "mun alasa sinpin ijo", _lili: 1)
