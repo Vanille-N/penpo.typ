@@ -6,9 +6,6 @@
 // Rough usage:
 // - anywhere in the document, invoke `open()`.
 //   This is where the log of all warnings will be inserted.
-// - at the end of the document, place `pini()`.
-//   This will create a tag that lets `open()` know when all errors have been
-//   received.
 // - in functions, invoke `pakala` to add all problems to the log.
 //   Warnings are identified by a tag and a severity.
 //   The tag determines when two warnings are identical, so that the log is not

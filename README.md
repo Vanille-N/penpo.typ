@@ -30,6 +30,10 @@ penpo provides
 
 ## Example
 
+The code below can be rendered in either sitelen Lasina or sitelen pona
+from the same markup, simply by applying a `#show` rule on `penpo.pona.sitelen`
+or `#penpo.lasina.sitelen`.
+
 ```typ
 // File: toki.typ
 #import "@preview/penpo:0.1.0"
@@ -133,7 +137,7 @@ toki ni li tan #link("https://wikipesija.org/wiki/mun_Masi")[lipu Wikipesija]
 ```
 ```typ
 // File: main-sl.typ
-#import "/src/lib.typ" as penpo
+#import "@preview/penpo:0.1.0"
 
 #show: penpo.lasina.sitelen
 
@@ -141,11 +145,11 @@ toki ni li tan #link("https://wikipesija.org/wiki/mun_Masi")[lipu Wikipesija]
 ```
 ```typ
 // File: main-sp.typ
-#import "/src/lib.typ" as penpo
+#import "@preview/penpo:0.1.0"
 
 #show: penpo.pona.sitelen
 
 #include "toki.typ"
 ```
-![lipu ni li kepeken e sitelen Lasina](sama-ni/main-sl.svg)
-![lipu ni li kepeken e sitelen pona](sama-ni/main-sp.svg)
+![document rendered in sitelen Lasina](sama-ni/main-sl.svg)
+![document rendered in sitelen pona](sama-ni/main-sp.svg)
