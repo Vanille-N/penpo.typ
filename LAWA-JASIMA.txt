@@ -1,5 +1,7 @@
 lawa jasima Emati ("MIT")
 
+-- English version: see LICENSE.txt --
+
 tenpo sike mute ale mute luka (2025), la jan Newen ("mi", nimi lon: Neven Villani)
 li pana e lipu ale lon poka ni ("lipu Ni") tawa jan ante ("sina"),
 li ken lawa e jasima pi lipu Ni.

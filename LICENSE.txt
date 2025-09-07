@@ -1,5 +1,7 @@
 MIT License
 
+-- lipu "LAWA-JASIMA.txt" li sama lipu ni, li kepeken toki pona --
+
 Copyright (c) 2025 Neven Villani, a.k.a. jan Newen
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

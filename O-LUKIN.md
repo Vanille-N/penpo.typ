@@ -35,9 +35,39 @@ lipu mute lon "sama-ni/" kin.
 
 ## wile tan nasin penpo
 
-- sina wile jo e ilo ["Typst"](https://typst.app).
 - sina wile jo e nasin sitelen
   ["sitelen seli kiwen"](https://www.kreativekorp.com/software/fonts/sitelenselikiwen/).
   ona li ken sitelen pona.
   o pana e lipu ".ttf" lon poka pi lipu sina.
+
+## o lukin
+
+```typ
+#import "@preview/penpo:0.1.0"
+
+// pakala lili li lon lipu ni la ona li kama sitelen tan ni
+#penpo.pakala.open()
+
+// nimi "penpo" en nimi "namako" li pakala ala
+#penpo.o-oke-e-nimi("penpo", "namako")
+
+// nimi Newen li kepeken e sitelen "namako en weka en namako" lon sitelen pona
+#penpo.nimisin("Newen", "namako en weka en namako", _lili: "namako namako")
+
+// o sitelen e toki ale kepeken sitelen Lasina en sitelen pona lon poka ona.
+#show par: pp => [
+  #table(columns: (1fr, 1fr), stroke: none,
+    penpo.lasina.sitelen[#pp],
+    penpo.pona.sitelen[#pp],
+  )
+]
+
+toki a!
+mi jan Newen.
+
+mi pali e lipu ni tan ni: /sp/
+mi wile pana e sona pi kepeken penpo tawa jan mute.
+```
+![toki a.](sama-ni/main.svg)
+
 
