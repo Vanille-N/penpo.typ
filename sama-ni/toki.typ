@@ -1,51 +1,14 @@
-# penpo
-
-[![tok](https://img.shields.io/badge/lang-tok-green.svg)](O-LUKIN.md)
-
-A toki pona spellchecker and transliteration library.
-
-See the [documentation](docs/main.pdf)
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="logo/penpo-dark.svg">
-  <img alt="penpo" src="logo/penpo-light.svg">
-</picture>
-
----
-
-## Features
-
-penpo provides
-- spellchecking and warnings for obscure words,
-- automatic transliteration to sitelen pona (available), and other alphabets (wip),
-- the ability to write text once and have it rendered in different writing systems,
-- a uniform interface for punctuation symbols across alphabets.
-
-## Prerequisites
-
-- the sitelen pona font
-  ["sitelen seli kiwen"](https://www.kreativekorp.com/software/fonts/sitelenselikiwen/)
-  is required, and must be downloaded manually.
-  See an example usage in [sama-ni/](sama-ni/).
-
-## Example
-
-```typ
-// File: toki.typ
-#import "@preview/penpo:0.1.0"
+#import "/src/lib.typ" as penpo
 
 #show link: set text(fill: blue.darken(20%))
 #set figure(numbering: none)
 
-// Show the error log and silence some rarity warnings
 #penpo.pakala.open()
 #penpo.o-oke-e-nimi("penpo", "namako", "soko", "n", "jasima", "majuna", "lanpan", "oko")
 
-// Define transliterations of names
 #penpo.nimisin("Newen", "namako en weka en namako", _lili: "namako namako")
 #penpo.nimisin("Lasina", "linja ale sona insa ni a", _lili: "linja sona")
 
-// Adjust punctuation style
 #penpo.o-ante-e-sitelen-lili("la", (
   ".": [~#sym.dot],
   "!": [~!],
@@ -59,7 +22,6 @@ penpo provides
 toki a!
 mi jan Newen.
 
-// `penpo.only` renders only in the corresponding writing system.
 mi pali e lipu ni kepeken
 #penpo.only("sp")[sitelen pona]#penpo.only("la")[sitelen Lasina]
 tan ni: /sp/
@@ -87,7 +49,6 @@ mi wile pana e sona pi kepeken penpo tawa jan mute.
   Temo: "tawa e mi o",
 )
 
-// All standard Typst elements are transliterated
 == mun Masi
 
 toki ni li tan #link("https://wikipesija.org/wiki/mun_Masi")[lipu Wikipesija]
@@ -130,22 +91,3 @@ toki ni li tan #link("https://wikipesija.org/wiki/mun_Masi")[lipu Wikipesija]
     caption: "sitelen pi mun Popo en mun Temo",
   )
 ]
-```
-```typ
-// File: main-sl.typ
-#import "/src/lib.typ" as penpo
-
-#show: penpo.lasina.sitelen
-
-#include "toki.typ"
-```
-```typ
-// File: main-sp.typ
-#import "/src/lib.typ" as penpo
-
-#show: penpo.pona.sitelen
-
-#include "toki.typ"
-```
-![lipu ni li kepeken e sitelen Lasina](sama-ni/main-sl.svg)
-![lipu ni li kepeken e sitelen pona](sama-ni/main-sp.svg)

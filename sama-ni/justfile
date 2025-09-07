@@ -1,5 +1,5 @@
-watch:
-  typst watch --font-path=fonts --root=.. main.typ
+watch alph:
+  typst watch --font-path=fonts --root=.. main-{{alph}}.typ
 
-svg:
-  typst compile --format=svg --font-path=fonts --root=.. main.typ
+svg alph:
+  typst compile --format=svg --font-path=fonts --root=.. main-{{alph}}.typ

@@ -24,8 +24,8 @@
 /// Start collecting errors. Call this wherever you want the error log
 /// to appear. -> content
 #let open(kokosila: false) = open-aux(
-  if kokosila [The following typos have been detected:] else [lipu ni li jo e pakala lili:],
-  x => if kokosila { x.en } else { x.tok },
+  if kokosila { text(lang: "en")[The following typos have been detected:] } else { text(lang: "tok")[lipu ni li jo e pakala lili:] },
+  x => if kokosila { text(lang: "en", x.en) } else { text(lang: "tok", x.tok) },
 )
 
 /// Letter is lowercase but should be uppercase.
