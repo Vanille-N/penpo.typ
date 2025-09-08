@@ -83,11 +83,34 @@ toki ni li tan #link("https://wikipesija.org/wiki/mun_Masi")[lipu Wikipesija]
   ona li kiwen li sike lukin ala. /sp/
 ][
   #figure(
-    image("assets/mun-Masi.jpg"),
+    {
+      // Placeholder
+      /*box(width: 5cm, height: 5cm, fill: black)[
+        #place(center + horizon)[
+          #circle(fill: rgb("bf4d21"), radius: 2cm)
+        ]
+      ]*/
+      // Or download:
+      // "https://wikipesija.org/wiki/sitelen:OSIRIS_Mars_true_color.jpg"
+      image("assets/mun-Masi.jpg")
+    },
     caption: "sitelen pi mun Masi",
   )
   #figure(
-    image("assets/mun-Popo-en-Temo.jpg"),
+    {
+      // Placeholder
+      /*box(width: 6cm, height: 4cm, fill: black)[
+        #place(left + horizon, dx: 5mm)[
+          #circle(fill: rgb("a6654c"), radius: 1.3cm)
+        ]
+        #place(right + horizon, dx: -5mm)[
+          #circle(fill: rgb("b8701f"), radius: 0.8cm)
+        ]
+      ]*/
+      // Or download:
+      // https://wikipesija.org/wiki/sitelen:Phobos_and_Deimos.jpg
+      image("assets/mun-Popo-en-Temo.jpg"),
+    },
     caption: "sitelen pi mun Popo en mun Temo",
   )
 ]
