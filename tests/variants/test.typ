@@ -50,11 +50,12 @@ meli meli/1 meli/2
 mije mije/1 mije/2
 
 
-#penpo.nimisin-mute(
-  _lili: none,
-  Masi: "mije ala suno insa",
-  Mami: "mije/1 ala mute insa",
-  Majo: "mije/2 ala jo owe",
+#penpo.nimi-ijo(
+  lili: none, (
+    Masi: "mije ala suno insa",
+    Mami: "mije/1 ala mute insa",
+    Majo: "mije/2 ala jo owe",
+  ),
 )
 
 Masi Mami Majo

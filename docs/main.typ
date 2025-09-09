@@ -22,7 +22,7 @@ writing systems in the future.
 
     #penpo.pona.sitelen[#pp]
   ]
-  #penpo.nimisin-mute(Lasina: "linja ale sona ilo nasin alasa")
+  #penpo.nimi-ijo((Lasina: "linja ale sona ilo nasin alasa"))
   ilo penpo li ilo lipu, li ken sitelen e toki pona kepeken sitelen Lasina
   en sitelen pona en sitelen ante mute.
   tenpo ni en tenpo kama la sina ken ante e sitelen lili kepeken wawa lili.
@@ -63,9 +63,11 @@ The SVG files can be found in `logo/`.
 The package name "`penpo`" should never be capitalized in any context,
 even at the start of a sentence.
 It can however be freely substituted by any of
-- the logo scaled to the font size,
-- the regular hieroglyph "#penpo.pona.sitelen[penpo]" in any sitelen pona font,
-- any other reasonable transcription of the word "penpo" in the current writing system.
+- the logo appropriately scaled to the font size #context[#box(height: text.size)[#image("../logo/penpo-light.svg", height: 1.3 * text.size)]],
+- the regular hieroglyph "#context[#box(height: text.size)[#text(size: 1.3 * text.size)[#penpo.pona.sitelen[penpo]]]]" in any sitelen pona font,
+- any other reasonable transcription of the word "penpo" in the current writing system
+  in all lowercase letters,
+  including but not limited to "벤보", "ペンポ", "пенпо", "πενπο", etc.
 
 = Getting started
 
@@ -98,20 +100,21 @@ and sitelen pona.
   mi wile pana e sona pi lipu penpo.
 ]
 
-In sitelen pona, you can declare nimisin to be spelled out in hieroglyphs.
+In sitelen pona, you can declare a dictionary of names (`nimi-ijo`)
+to be spelled out in hieroglyphs.
 By default it is shortened from the second time onwards,
-but this can be disabled by `_lili: none`.
+but this can be disabled by `lili: none`.
 
 #table(columns: (55%, 45%), stroke: 0.1pt)[
   ```typ
   #show: penpo.pona.sitelen
-  #penpo.nimisin-mute(
+  #penpo.nimi-ijo((
     Lasina: "linja ale sona insa ni awen",
     Newen: "namako en weka en namako",
-  )
-  #penpo.nimisin-mute(
-    _lili: none,
-    Inli: "isipin ni li isipin",
+  ))
+  #penpo.nimi-ijo(
+    lili: none,
+    (Inli: "isipin ni li isipin"),
   )
   ni li sitelen Lasina ala. \
   toki Inli li kepeken sitelen Lasina, \
@@ -121,13 +124,13 @@ but this can be disabled by `_lili: none`.
   ```
 ][
   #show: penpo.pona.sitelen
-  #penpo.nimisin-mute(
+  #penpo.nimi-ijo((
     Lasina: "linja ale sona insa ni awen",
     Newen: "namako en weka en namako",
-  )
-  #penpo.nimisin-mute(
-    _lili: none,
-    Inli: "isipin ni li isipin",
+  ))
+  #penpo.nimi-ijo(
+    lili: none,
+    (Inli: "isipin ni li isipin"),
   )
   ni li sitelen Lasina ala. \
   toki Inli li kepeken sitelen Lasina, \
@@ -145,12 +148,12 @@ You can use `esc` to temporarily disable reformatting.
 
     #penpo.pona.sitelen[#pp]
   ]
-  #penpo.nimisin-mute(
+  #penpo.nimi-ijo((
     Masi: "mun alasa sona ike",
     Inli: "isipin ni li isipin",
     Wikipesija: "walo ijo kin ijo pona esun sona ijo jo ale",
     Insanjuwisi: "ilo nasin sona awen nena jo uta wile ilo sona ilo",
-  )
+  ))
   ilo Insanjuwisi \
   (toki Inli: "#penpo.esc[Ingenuity]")
   li ken tawa lon kon. 
@@ -165,12 +168,12 @@ You can use `esc` to temporarily disable reformatting.
 
     #penpo.pona.sitelen[#pp]
   ]
-  #penpo.nimisin-mute(
+  #penpo.nimi-ijo((
     Masi: "mun alasa sona ike",
     Inli: "isipin ni li isipin",
     Wikipesija: "walo ijo kin ijo pona esun sona ijo jo ale",
     Insanjuwisi: "ilo nasin sona awen nena jo uta wile ilo sona ilo",
-  )
+  ))
   ilo Insanjuwisi \
   (toki Inli: "#penpo.esc[Ingenuity]") li ken tawa lon kon. 
   #align(right)[---~ tan lipu Wikipesija, #link("https://wikipesija.org/wiki/mun_Masi")[mun Masi]]
@@ -251,8 +254,7 @@ The following functions have an alias:
   #table(columns: 2, align: left,
     `o-ante-e-sitelen-lili`, `kokosila.update-punct`,
     `o-oke-e-nimi`, `kokosila.allow-words`,
-    `nimisin`, `kokosila.spelling`,
-    `nimisin-mute`, `kokosila.spellings`,
+    `nimi-ijo`, `kokosila.spelling`,
     `pakala.open`, `kokosila.begin-log`,
     `pakala.pini`, `kokosila.end-log`,
     `pona.nanpa-ala-li-nanpa`, `kokosila.default-sp-variant`,
@@ -261,50 +263,56 @@ The following functions have an alias:
 
 = Advanced options
 
-== nimisin
+== nimi ijo
 
-Shortening is customizable through `_lili`:
-- if `_lili` is an integer, the name is shortened to the `_lili` first characters,
-- the default is the first character only, equivalent to `_lili: 1`,
-- if `_lili` is `none`, the name will not be shortened,
-- if `_lili` is a string, it is interpreted literally as the spelling.
+These options are related to the spelling of names in sitelen pona using
+multiple hyeroglyphs. Once the name has appeared once in full, it can be shortened
+in future occurrences.
+
+Shortening is customizable through `lili`:
+- if `lili` is an integer, the name is shortened to the `lili` first characters,
+- the default is the first character only, equivalent to `lili: 1`,
+- if `lili` is `none`, the name will not be shortened,
+- if `lili` is a string, it is interpreted literally as the spelling.
 
 #table(columns: (55%, 45%), stroke: 0.1pt)[
   ```typ
-  #penpo.nimisin("Lasina",
-    "linja ale sona ilo nasin alasa")
+  #penpo.nim-ijo((Lasina:
+    "linja ale sona ilo nasin alasa"))
   ```
 ][
   #show: penpo.pona.sitelen
-  #penpo.nimisin("Lasina", "linja ale sona ilo nasin alasa")
+  #penpo.nimi-ijo((Lasina: "linja ale sona ilo nasin alasa"))
   Lasina Lasina
 ][
   ```typ
-  #penpo.nimisin("Lasina", _lili: 2,
-    "linja ale sona ilo nasin alasa")
+  #penpo.nimi-ijo(lili: 2, (Lasina:
+    "linja ale sona ilo nasin alasa"))
   ```
 ][
   #show: penpo.pona.sitelen
-  #penpo.nimisin("Lasina", "linja ale sona ilo nasin alasa", _lili: 2)
+  #penpo.nimi-ijo(lili: 2, (Lasina:
+    "linja ale sona ilo nasin alasa"))
   Lasina Lasina
 ][
   ```typ
-  #penpo.nimisin("Lasina", _lili: none,
-    "linja ala sona ilo nasin alasa")
+  #penpo.nimisin(lili: none, (Lasina:
+    "linja ala sona ilo nasin alasa"))
   ```
 ][
   #show: penpo.pona.sitelen
-  #penpo.nimisin("Lasina", "linja ale sona ilo nasin alasa", _lili: none)
+  #penpo.nimi-ijo(lili: none, (Lasina: "linja ale sona ilo nasin alasa"))
   Lasina Lasina
 ][
   ```typ
-  #penpo.nimisin("Lasina",
-    _lili: "linja nasin alasa",
-    "linja ala sona ilo nasin alasa")
+  #penpo.nimisin((Lasina:
+    "linja ala sona ilo nasin alasa"),
+    lili: "linja nasin alasa")
   ```
 ][
   #show: penpo.pona.sitelen
-  #penpo.nimisin("Lasina", "linja ale sona ilo nasin alasa", _lili: "linja nasin alasa")
+  #penpo.nimi-ijo((Lasina: "linja ale sona ilo nasin alasa"),
+    lili: "linja nasin alasa")
   Lasina Lasina
 ]
 
@@ -351,12 +359,12 @@ More may be available in the future.
 
 #table(columns: (55%, 45%), stroke: 0.1pt)[
   ```typ
-  #penpo.nimisin-mute(
+  #penpo.nimi-ijo((
     Masi: "mun alasa sona ike",
     Inli: "isipin ni li isipin",
     Wikipesija: "walo ijo kin ijo pona esun sona ijo jo ale",
     Insanjuwisi: "ilo nasin sona awen nena jo uta wile ilo sona ilo",
-  )
+  ))
   #penpo.o-ante-e-sitelen-lili("la", (
     "\"": smartquote(quotes: ("「", "」")),
   ))
@@ -379,12 +387,12 @@ More may be available in the future.
 
     #penpo.pona.sitelen[#pp]
   ]
-  #penpo.nimisin-mute(
+  #penpo.nimi-ijo((
     Masi: "mun alasa sona ike",
     Inli: "isipin ni li isipin",
     Wikipesija: "walo ijo kin ijo pona esun sona ijo jo ale",
     Insanjuwisi: "ilo nasin sona awen nena jo uta wile ilo sona ilo",
-  )
+  ))
   #penpo.o-ante-e-sitelen-lili("la", (
     "\"": smartquote(quotes: ("「", "」")),
   ))
@@ -427,16 +435,16 @@ of `text`.
 //#document("hangul", "Hangul alphabet")
 //#document("hiragana", "Hiragana alphabet")
 
-= Module documentation
+//= Module documentation
 
 // TODO
 
-#document("dyn", "Dynamic state")
-#document("extra", "Auxiliary functions")
-#document("kipisi", "")
-#document("lib", "")
-#document("nasin-sitelen", "")
-#document("nimi", "")
-#document("nimisin", "")
-#document("pakala", "")
+//#document("dyn", "Dynamic state")
+//#document("extra", "Auxiliary functions")
+//#document("kipisi", "")
+//#document("lib", "")
+//#document("nasin-sitelen", "")
+//#document("nimi", "")
+//#document("nimisin", "")
+//#document("pakala", "")
 

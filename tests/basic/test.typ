@@ -1,26 +1,27 @@
 #import "/src/lib.typ" as penpo
 
-#penpo.nimisin("Inli", "insa n li ijo", _lili: none)
-#penpo.nimisin("Masi", "mun alasa sinpin ijo", _lili: 1)
-#penpo.nimisin("Newen", "namako en weka en namako", _lili: "namako namako")
+#penpo.nimi-ijo((Inli: "insa n li ijo"), lili: none)
+#penpo.nimi-ijo((Masi: "mun alasa sinpin ijo"), lili: 1)
+#penpo.nimi-ijo((Newen: "namako en weka en namako"), lili: "namako namako")
 
-#penpo.nimisin-mute(
-  _lili: none,
-  Sola: "suno o lukin ala",
-  Mekuliju: "majuna e kule uta li insa jasima uta",
-  Tela: "toki e lon ala",
-  Olinpu: "o lukin insa nena pona unpa",
-  Mon: "ma open nena",
-  Mewika: "moku esun weka ilo kalama awen",
-  Elopa: "esun lawa olin pona awen",
-  Losi: "lanpan oko sewi insa",
-  Nijon: "nasin ijo jan olin n",
-  Loma: "lawa olin mi awen",
-  Imalasi: "insa ma ala lon akesi suno ilo",
-  Sonko: "soko open ni kiwen o",
-  Insanjuwisi: "ilo nasin sona awen nena jo uta wile ilo sona ilo",
-  Popo: "pi o pi o",
-  Temo: "tawa e mi o",
+#penpo.nimi-ijo(
+  lili: none, (
+    Sola: "suno o lukin ala",
+    Mekuliju: "majuna e kule uta li insa jasima uta",
+    Tela: "toki e lon ala",
+    Olinpu: "o lukin insa nena pona unpa",
+    Mon: "ma open nena",
+    Mewika: "moku esun weka ilo kalama awen",
+    Elopa: "esun lawa olin pona awen",
+    Losi: "lanpan oko sewi insa",
+    Nijon: "nasin ijo jan olin n",
+    Loma: "lawa olin mi awen",
+    Imalasi: "insa ma ala lon akesi suno ilo",
+    Sonko: "soko open ni kiwen o",
+    Insanjuwisi: "ilo nasin sona awen nena jo uta wile ilo sona ilo",
+    Popo: "pi o pi o",
+    Temo: "tawa e mi o",
+  ),
 )
 
 #let paragraph = [
