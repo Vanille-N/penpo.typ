@@ -4,6 +4,7 @@
 
 A toki pona spellchecker and transliteration library.
 
+<!-- @scrybe(if publish; grep https; grep {{version}}) -->
 See the [documentation](docs/main.pdf)
 
 <picture>
@@ -12,6 +13,9 @@ See the [documentation](docs/main.pdf)
 </picture>
 
 ---
+
+"penpo" is a contraction of "(pi) toki pona taso",
+meaning "toki pona exclusively".
 
 ## Features
 
@@ -23,10 +27,11 @@ penpo provides
 
 ## Prerequisites
 
-- the sitelen pona font
-  ["sitelen seli kiwen"](https://www.kreativekorp.com/software/fonts/sitelenselikiwen/)
-  is required, and must be downloaded manually.
-  See an example usage in [sama-ni/](sama-ni/).
+- requires manual download of the sitelen pona font
+  ["sitelen seli kiwen"](https://www.kreativekorp.com/software/fonts/sitelenselikiwen/).
+  See an example usage in
+  <!-- @scrybe(if publish; grep https; grep {{version}}) -->
+  [sama-ni/](sama-ni/).
 
 ## Example
 
@@ -34,9 +39,12 @@ The code below can be rendered in either sitelen Lasina or sitelen pona
 from the same markup, simply by applying a `#show` rule on `penpo.pona.sitelen`
 or `#penpo.lasina.sitelen`.
 
+<!-- @scrybe(not publish; jump import; grep local; grep {{version}}) -->
+<!-- @scrybe(if publish; jump import; grep preview; grep {{version}}) -->
+<!-- @scrybe(jump import; until ```; diff sama-ni/toki.typ) -->
 ```typ
 // File: toki.typ
-#import "@preview/penpo:0.1.0"
+#import "@local/penpo:0.1.0"
 
 #show link: set text(fill: blue.darken(20%))
 #set figure(numbering: none)
@@ -46,8 +54,8 @@ or `#penpo.lasina.sitelen`.
 #penpo.o-oke-e-nimi("penpo", "namako", "soko", "n", "jasima", "majuna", "lanpan", "oko")
 
 // Define transliterations of names
-#penpo.nimisin("Newen", "namako en weka en namako", _lili: "namako namako")
-#penpo.nimisin("Lasina", "linja ale sona insa ni a", _lili: "linja sona")
+#penpo.nimi-ijo((Newen: "namako en weka en namako"), lili: "namako namako")
+#penpo.nimi-ijo((Lasina: "linja ale sona insa ni a"), lili: "linja sona")
 
 // Adjust punctuation style
 #penpo.o-ante-e-sitelen-lili("la", (
@@ -69,26 +77,27 @@ mi pali e lipu ni kepeken
 tan ni: /sp/
 mi wile pana e sona pi kepeken penpo tawa jan mute.
 
-#penpo.nimisin("Inli", "insa n li ijo", _lili: none)
-#penpo.nimisin("Masi", "mun alasa sinpin ijo", _lili: 1)
-#penpo.nimisin("Wikipesija", "wile ilo kon ilo pona esun sona ilo jan ale", _lili: 1)
-#penpo.nimisin-mute(
-  _lili: none,
-  Sola: "suno o lukin ala",
-  Mekuliju: "majuna e kule uta li insa jasima uta",
-  Tela: "toki e lon ala",
-  Olinpu: "o lukin insa nena pona unpa",
-  Mon: "ma open nena",
-  Mewika: "moku esun weka ilo kalama awen",
-  Elopa: "esun lawa olin pona awen",
-  Losi: "lanpan oko sewi insa",
-  Nijon: "nasin ijo jan olin n",
-  Loma: "lawa olin mi awen",
-  Imalasi: "insa ma ala lon akesi suno ilo",
-  Sonko: "soko open ni kiwen o",
-  Insanjuwisi: "ilo nasin sona awen nena jo uta wile ilo sona ilo",
-  Popo: "pi o pi o",
-  Temo: "tawa e mi o",
+#penpo.nimi-ijo((Inli: "insa n li ijo"), lili: none)
+#penpo.nimi-ijo((Masi: "mun alasa sinpin ijo"), lili: 1)
+#penpo.nimi-ijo((Wikipesija: "wile ilo kon ilo pona esun sona ilo jan ale"), lili: 1)
+#penpo.nimi-ijo(
+  lili: none, (
+    Sola: "suno o lukin ala",
+    Mekuliju: "majuna e kule uta li insa jasima uta",
+    Tela: "toki e lon ala",
+    Olinpu: "o lukin insa nena pona unpa",
+    Mon: "ma open nena",
+    Mewika: "moku esun weka ilo kalama awen",
+    Elopa: "esun lawa olin pona awen",
+    Losi: "lanpan oko sewi insa",
+    Nijon: "nasin ijo jan olin n",
+    Loma: "lawa olin mi awen",
+    Imalasi: "insa ma ala lon akesi suno ilo",
+    Sonko: "soko open ni kiwen o",
+    Insanjuwisi: "ilo nasin sona awen nena jo uta wile ilo sona ilo",
+    Popo: "pi o pi o",
+    Temo: "tawa e mi o",
+  )
 )
 
 // All standard Typst elements are transliterated
@@ -135,7 +144,9 @@ toki ni li tan #link("https://wikipesija.org/wiki/mun_Masi")[lipu Wikipesija]
       ]
       // Or download:
       // "https://wikipesija.org/wiki/sitelen:OSIRIS_Mars_true_color.jpg"
-      // image("/assets/mun-Masi.jpg")
+      /*
+      image("assets/mun-Masi.jpg")
+      */
     },
     caption: "sitelen pi mun Masi",
   )
@@ -152,26 +163,36 @@ toki ni li tan #link("https://wikipesija.org/wiki/mun_Masi")[lipu Wikipesija]
       ]
       // Or download:
       // https://wikipesija.org/wiki/sitelen:Phobos_and_Deimos.jpg
-      // image("/assets/mun-Popo-en-Temo.jpg"),
+      /*
+      image("assets/mun-Popo-en-Temo.jpg")
+      */
     },
     caption: "sitelen pi mun Popo en mun Temo",
   )
 ]
 ```
+<!-- @scrybe(not publish; jump import; grep local; grep {{version}}) -->
+<!-- @scrybe(if publish; jump import; grep preview; grep {{version}}) -->
+<!-- @scrybe(jump import; until ```; diff sama-ni/main-sl.typ) -->
 ```typ
 // File: main-sl.typ
-#import "@preview/penpo:0.1.0"
+#import "@local/penpo:0.1.0"
 
 #show: penpo.lasina.sitelen
 
 #include "toki.typ"
 ```
+<!-- @scrybe(not publish; jump import; grep local; grep {{version}}) -->
+<!-- @scrybe(if publish; jump import; grep preview; grep {{version}}) -->
+<!-- @scrybe(jump import; until ```; diff sama-ni/main-sp.typ) -->
 ```typ
 // File: main-sp.typ
-#import "@preview/penpo:0.1.0"
+#import "@local/penpo:0.1.0"
 
-// Requires https://www.kreativekorp.com/software/fonts/sitelenselikiwen
-// downloaded to /fonts/sitelenselikiwenasuki.ttf
+// Requires
+//   https://www.kreativekorp.com/software/fonts/sitelenselikiwen
+// downloaded to
+//   /fonts/sitelenselikiwenasuki.ttf
 #show: penpo.pona.sitelen
 
 #include "toki.typ"

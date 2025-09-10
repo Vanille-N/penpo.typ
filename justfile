@@ -4,6 +4,12 @@ doc:
 test +cmd:
   tt --font-path=. {{cmd}}
 
+scrybe:
+  scrybe README.md O-LUKIN.md typst.toml --version=0.1.0
+
+scrybe-publish:
+  scrybe release/README.md release/O-LUKIN.md release/typst.toml --publish --version=0.1.0
+
 publish:
   mkdir -p release
   rm -rf release/*
